@@ -244,7 +244,7 @@ class SiteController extends Controller
 //             return $this->goHome();
 //         }
 	
-//         $model = new LoginForm();
+        $model = new LoginForm();
 //         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 //             return $this->goBack();
 //         } else {
@@ -254,13 +254,13 @@ class SiteController extends Controller
 //         }
         
         $session = Yii::$app->session;
-        $request = Yii::$app->request;
+        $request = Yii::$app->request->post();
         
         if (!empty($session['user'])) {
         		return $this->goHome();
         }
         
-        if (！empty($request['email']) && !empty($request['password'])) {
+        if (!empty($request['email']) && !empty($request['password'])) {
         	$url = "http://mobvoi-account/login?account_type=email";
         	$post_data = array(
         			"email" => $request['email'],
@@ -284,7 +284,9 @@ class SiteController extends Controller
         	}
         	return json_encode($msg);
         } else {
-            return $this->render('login');
+            return $this->render('login', [
+                'model' => $model,
+            ]);
         }
         
     }
