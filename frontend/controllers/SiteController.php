@@ -13,6 +13,10 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use backend\models\UserData;
+use yii\helpers\Url;
+
+
+
 /**
  * Site controller
  */
@@ -374,7 +378,7 @@ class SiteController extends Controller
         	//         $verify_url = "http://testdev.chumenwenwen.com/verify.html?token=" . $this->generateToken();
         	
         	$mail_body = str_replace('@url', $verify_url,
-        			str_replace('@name', $request['name'],
+        			str_replace('@name', $request['username'],
         					$this->mail_body[$language]['register']));
         	
         	$send_mail_result = $this->sendMail($request['email'], $this->mail_subject[$language]['register'], $mail_body);
