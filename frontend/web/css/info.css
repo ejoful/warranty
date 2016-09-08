@@ -1,0 +1,20 @@
+.return-product{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.return-product .title{
+    font-size: 18px;
+}
+.return-product .list-span{
+    display: block;
+    margin-top: 20px;
+}
+.return-product .sp{
+    display: none;
+    margin-left: 30px;
+    color: rebeccapurple;
+}
+.return-product .option-list{
+    color: #66bfff;
+}

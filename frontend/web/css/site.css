@@ -38,6 +38,11 @@ body {
 .wrap > .container {
     padding: 70px 15px 20px;
 }
+.site-index{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
 .site-index h1{
     font-size: 18px;
     text-align: center;
@@ -54,6 +59,14 @@ body {
     font-size: 16px;
     line-height: 1.625;
     font-family: Roboto,sans-serif;
+}
+.site-index p a{
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 40px;
 }
 .footer {
     height: 60px;
