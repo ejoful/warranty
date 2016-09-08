@@ -1,0 +1,3 @@
+[submodule "vendor/dektrium/yii2-user"]
+	path = vendor/dektrium/yii2-user
+	url = https://github.com/dektrium/yii2-user.git
