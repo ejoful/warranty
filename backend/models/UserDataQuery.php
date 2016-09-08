@@ -3,11 +3,11 @@
 namespace backend\models;
 
 /**
- * This is the ActiveQuery class for [[Fp]].
+ * This is the ActiveQuery class for [[UserData]].
  *
- * @see Fp
+ * @see UserData
  */
-class FpQuery extends \yii\db\ActiveQuery
+class UserDataQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class FpQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Fp[]|array
+     * @return UserData[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class FpQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Fp|array|null
+     * @return UserData|array|null
      */
     public function one($db = null)
     {
