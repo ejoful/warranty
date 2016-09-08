@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016-09-08 21:28:50
+-- Generation Time: 2016-09-08 21:28:03
 -- 服务器版本： 10.0.27-MariaDB
 -- PHP Version: 5.6.23
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `warranty_ticwear`
 --
+CREATE DATABASE IF NOT EXISTS `warranty_ticwear` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `warranty_ticwear`;
 
 -- --------------------------------------------------------
 
