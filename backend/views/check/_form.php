@@ -20,7 +20,7 @@ use backend\models\Sp;
     ) ?>
 
     <?= $form->field($model, 'spid')->dropDownList(
-        // Sp::items($model->fpid),
+        Sp::items($model->fpid),
         ['prompt' => '请选择'])
     ?>
 

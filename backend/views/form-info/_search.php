@@ -35,8 +35,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'problem_des') ?>
 
-    <?php // echo $form->field($model, 'photo') ?>
-
     <?php // echo $form->field($model, 'video') ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
@@ -44,6 +42,12 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'update_time') ?>
+
+    <?php // echo $form->field($model, 'wwid') ?>
+
+    <?php // echo $form->field($model, 'reviewerid') ?>
+
+    <?php // echo $form->field($model, 'logisid') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

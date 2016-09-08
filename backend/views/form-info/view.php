@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use backend\models\Country;
+use backend\models\Fp;
+use backend\models\Sp;
+use backend\models\Lookup;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\FormInfo */
@@ -33,16 +37,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'consumer_phone',
             'watch_id',
             'email:email',
-            'country',
+            [
+                'attribute' => 'country',
+                'value' => Country::item($model->country),
+            ],
             'address',
-            'firstlevel_problem',
-            'secondlevel_problem',
+            [
+                'attribute' => 'firstlevel_problem',
+                'value' => Fp::item($model->firstlevel_problem),
+            ],
+            [
+                'attribute' => 'secondlevel_problem',
+                'value' => Sp::item($model->firstlevel_problem,$model->secondlevel_problem),
+            ],
             'problem_des:ntext',
-            'photo',
             'video',
             'create_time',
-            'status',
             'update_time',
+            [
+                'attribute' => 'status',
+                'value' => Lookup::item('ReviewStatus',$model->status),
+            ],
         ],
     ]) ?>
 

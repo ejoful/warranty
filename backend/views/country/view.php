@@ -2,17 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use backend\models\Sp;
-use backend\models\Fp;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Check */
+/* @var $model backend\models\Country */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Checks'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Countries'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="check-view">
+<div class="country-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -31,17 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            //'fpid',
-            [
-                'attribute' => 'fpid',
-                'value'=> Fp::item($model->fpid),
-            ],
-            [
-                'attribute' => 'spid',
-                'value'=> Sp::item($model->fpid,$model->spid),
-            ],
-            //'spid',
-            'des:ntext',
+            'country_name',
             'position',
         ],
     ]) ?>
