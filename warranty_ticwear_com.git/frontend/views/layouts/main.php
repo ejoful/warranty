@@ -3,11 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Warranty Service',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,24 +36,16 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => '审核表', 'url' => ['/form-info/index']],
-        ['label' => '一级问题表', 'url' => ['/fp/index']],
-        ['label' => '二级问题表', 'url' => ['/sp/index']],
-        ['label' => '问题检查表', 'url' => ['/check/index']],
-        ['label' => 'Lookup', 'url' => ['/lookup/index']],
-        ['label' => '国家表', 'url' => ['/country/index']],
+        ['label' => 'ReturnProduct', 'url' => ['/info/index']],
     ];
     if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/user/security/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = ['label' => 'MyHistory', 'url' => ['/info/index','id'=>Yii::$app->user->id]];
+        $menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+        'url' => ['/user/security/logout'],
+        'linkOptions' => ['data-method' => 'post']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -73,9 +65,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; Mobvoi <?= date('Y') ?></p>
     </div>
 </footer>
 
