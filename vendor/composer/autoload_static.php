@@ -15,6 +15,7 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
+            'yii\\redactor\\' => 13,
             'yii\\httpclient\\' => 15,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
@@ -24,6 +25,11 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
             'yii\\bootstrap\\' => 14,
             'yii\\authclient\\' => 15,
             'yii\\' => 4,
+        ),
+        'k' => 
+        array (
+            'kartik\\datetime\\' => 16,
+            'kartik\\base\\' => 12,
         ),
         'd' => 
         array (
@@ -43,6 +49,10 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         'yii\\swiftmailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
+        ),
+        'yii\\redactor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiidoc/yii2-redactor',
         ),
         'yii\\httpclient\\' => 
         array (
@@ -79,6 +89,14 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'kartik\\datetime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
         ),
         'dektrium\\user\\' => 
         array (

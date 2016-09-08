@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\Fp;
 /**
  * InfoController implements the CRUD actions for Info model.
  */
@@ -42,6 +43,7 @@ class InfoController extends Controller
      */
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 }
