@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\Fp;
 use backend\models\Sp;
+use backend\models\Check;
+use backend\models\Country;
 /**
  * InfoController implements the CRUD actions for Info model.
  */
@@ -47,20 +49,44 @@ class InfoController extends Controller
         $fp = Fp::find()
         ->orderBy('position')
         ->all();
-        return $this->render('index',['fp' => $fp]);
+        $country = Country::find()
+        ->orderBy('position')
+        ->all();
+        return $this->render('index',['fp' => $fp,'country' => $country]);
     }
 
     public function actionSearch()
     {
         $post = Yii::$app->request->post();
         $fpid = $post['fpid'];
-        $Sp = Sp::find()
-        ->where(['fpid' => $fpid])
+        $fp = fp::find()
+        ->where(['id' => $fpid])
+        ->one();
+        $list="";
+        if($fp->des=="Others"){
+            return $list;
+        }
+        else{
+            $Sp = Sp::find()
+            ->where(['fpid' => $fpid])
+            ->orderBy('position')
+            ->all();
+            foreach ($Sp as $sp) {
+                $list.="<span class='list-span'><input type='radio' class='sp-btn' name='sp' value='".$sp->id."'>".$sp->des."</span>";
+            }
+            return $list;
+        }
+    }
+    public function actionSelfCheck(){
+        $post = Yii::$app->request->post();
+        $spid = $post['spid'];
+        $check = Check::find()
+        ->where(['spid' => $spid])
         ->orderBy('position')
         ->all();
-        $list="";
-        foreach ($Sp as $sp) {
-            $list.="<span class='list-span'><input type='radio' class='sp-btn' name='sp' value='".$sp->id."'>".$sp->des."</span>";
+        $list = '';
+        foreach ($check as $check) {
+            $list.="<p>".$check->des."</p>";
         }
         return $list;
     }

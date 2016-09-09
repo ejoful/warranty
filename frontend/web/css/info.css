@@ -1,3 +1,10 @@
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover{
+    text-decoration: none;
+}
 .return-product{
     width: 70%;
     margin: 0 auto;
@@ -16,6 +23,141 @@
     color: rebeccapurple;
 }
 .return-product .option-list{
-    color: #66bfff;
     font-weight: bold;
+}
+.return-product .action-line{
+    text-align: center;
+}
+.return-product .action-line span{
+    display: inline-block;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 40px;
+    margin-right: 40px;
+}
+.return-product .action-line .active{
+    color: #5480a3;
+}
+.return-product .line-img{
+    text-align: center;
+}
+.return-product .line-img .line{
+    height: 1px;
+    width: 205px;
+    display: inline-block;
+    border: 3px solid #ccc;
+}
+.return-product .line-img .line.active{
+    border: 3px solid #5480a3;
+}
+.return-product .line-img .circle.active{
+    background-color: #5480a3;
+}
+.return-product .line-img .circle{
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    background-color: #ccc;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+}
+.return-product .commit{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.return-product .commit a,
+.self-define .submit a,
+.self-check .yes-no a,
+.user-form .submit a{
+    display: inline-block;
+    width: 90px;
+    height: 36px;
+    line-height: 36px;
+    background-color: #5480a3;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}
+.self-check,
+.self-define,
+.yes-after,
+.user-form{
+    display: none;
+    margin-top: 30px;
+}
+.self-define .submit,
+.user-form .submit{
+    margin-top: 40px;
+    text-align: center;
+}
+.self-define .title{
+    font-size: 14px;
+}
+input[type="file"]{
+    display: inline-block;
+}
+.self-define .submit .back-btn,
+.user-form .back-btn,
+.self-define .submit .submit-btn{
+    margin-right: 40px;
+}
+.self-check .fp-des{
+    font-size: 22px;
+}
+.self-check .check-des{
+    margin-left: 18px;
+    margin-top: 30px;
+}
+.self-check .yes-no{
+    margin-top: 40px;
+    text-align: center;
+}
+.self-check .yes-no a{
+    margin-right: 40px;
+}
+.yes-after{
+    text-align: center;
+    margin-top: 40px;
+}
+.yes-after a{
+    margin-top: 40px;
+    display: block;
+}
+.user-form .form-title{
+    text-align: right;
+    width: 200px;
+    margin-right: 5px;
+}
+.user-form input,
+.user-form select,
+.self-define .video-url{
+    width: 196px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 34px;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.self-define .video-url{
+    width: 340px;
+}
+.user-form tr{
+    display: block;
+    margin-top: 30px;
+}
+.user-form td{
+    display: inline-block;
+}
+.user-form table{
+    margin: 0 auto;
+}
+.user-form .upload-proof-p{
+    margin-top: 30px;
 }
