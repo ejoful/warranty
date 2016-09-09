@@ -66,7 +66,7 @@ $(".btn-primary").click(function(){
 			success: function(data) {
 					console.log(data);
 					if (data.status == 'success') {
-						
+						window.location.href = '<?= Url::to(['site/index'],true) ?>';
 					} else {
 						alert(data.msg);
 					}

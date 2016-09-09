@@ -226,6 +226,17 @@ class SiteController extends Controller
     		]
     ];
     
+    private $URLS = [
+    		'bind_email' => 'http://mobvoi-account/bind/email/token?token=%s&email=%s&origin=developer.chumenwenwen.com',
+    		'register' => 'http://mobvoi-account/register?account_type=email',
+    		'get_userinfo_byemail' => 'http://mobvoi-account/account/info/email?email=%s&origin=developer.chumenwenwen.com',
+    		'get_user_info' => "http://mobvoi-account/get_account_info?wwid=%s&origin=developer.chumenwenwen.com",
+    		'send_mail' => "http://mobvoi-account/mail/mime?origin=developer.chumenwenwen.com",
+    		'mail_token' => "http://mobvoi-account/mail/token?email=%s&usage=%s&origin=developer.chumenwenwen.com",
+    		'mail_token_verify' => "http://mobvoi-account/mail/token/verify?token=%s&email=%s&usage=%s&origin=developer.chumenwenwen.com",
+    		'sms_verify' => "http://mobvoi-account/captcha/sms/verify?phone=%s&captcha=%s&usage=%s&origin=developer.chumenwenwen.com",
+    ];
+    
     private $MAIL_LINK = [
     		'register' => 'verify link should be here',
     		'reset_pwd' => 'link to reset password page'
@@ -366,7 +377,12 @@ class SiteController extends Controller
         
         
         if (!empty($request['username']) && !empty($request['email']) && !empty($request['password']) && !empty($request['language'])) {
-
+			$is_exist = UserData::findOne(['email' => $request['email']]);
+			if ($is_exist != null) {
+				$msg['status'] = 'error';
+				$msg['msg'] = "This email address already corresponds to a Mobvoi Account. Please sign in";
+				return json_encode($msg);
+			}
         	$user = new UserData();
         	$user->username = $request['username'];
         	$user->email = $request['email'];
@@ -379,15 +395,28 @@ class SiteController extends Controller
         	
         	// TODO: 需要一个用户从邮箱点进去的页面，完成验证和注册到问问id
         	$verify_url = Url::to(['site/active-user', 'lang' => 'en', 'token' => $user->password_reset_token], true);
-        	//         $verify_url = "http://testdev.chumenwenwen.com/verify.html?token=" . $this->generateToken();
+        	
         	
         	$mail_body = str_replace('@url', $verify_url,
         			str_replace('@name', $request['username'],
         					$this->mail_body['en']['register']));
         	
-        	$send_mail_result = $this->sendMail($request['email'], $this->mail_subject['en']['register'], $mail_body);
+        	$response_str = $this->sendMail($request['email'], $this->mail_subject['en']['register'], $mail_body);
         	
-        	return $send_mail_result;
+        	
+        	
+        	$response = json_decode($response_str);
+        	
+        	if ($response->err_code == 0) {
+        		$msg['status'] = 'success';
+        		$msg['msg'] = 'Dear user, we give you an e-mail sent activation email, ';
+        		$msg['msg'] .= 'please click on the activation link inside the email to activate your account';
+        		return json_encode($msg);
+        	} else {
+        		return $response_str;
+        	}
+        	
+        	
         } else {
         	return $this->render('signup');
         }

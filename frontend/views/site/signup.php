@@ -58,13 +58,15 @@ $(".btn-primary").click(function(){
 					username: $('#signupform-email').val(),
 					email: $('#signupform-email').val(),
 					password: $('#signupform-password').val(),
+					language: 'en',
 					_csrf: $('meta[name=csrf-token]').attr('content'),
 				},
 			dataType: 'json',
 			success: function(data) {
 					console.log(data);
 					if (data.status == 'success') {
-						
+						alert(data.msg);
+						window.location.href = '<?= Url::to(['site/index'],true) ?>';
 					} else {
 						alert(data.msg);
 					}
