@@ -226,6 +226,10 @@ class SiteController extends Controller
     		]
     ];
     
+    private $MAIL_LINK = [
+    		'register' => 'verify link should be here',
+    		'reset_pwd' => 'link to reset password page'
+    ];
     
     /**
      * Displays homepage.
@@ -349,7 +353,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
+//         $model = new SignupForm();
 //         if ($model->load(Yii::$app->request->post())) {
 //             if ($user = $model->signup()) {
 //                 if (Yii::$app->getUser()->login($user)) {
@@ -362,7 +366,7 @@ class SiteController extends Controller
         
         
         if (!empty($request['username']) && !empty($request['email']) && !empty($request['password']) && !empty($request['language'])) {
-        	$language = $request['language'];
+
         	$user = new UserData();
         	$user->username = $request['username'];
         	$user->email = $request['email'];
@@ -374,20 +378,18 @@ class SiteController extends Controller
         	$user->save(false);
         	
         	// TODO: 需要一个用户从邮箱点进去的页面，完成验证和注册到问问id
-        	$verify_url = Url::to(['site/active-user', 'lang' => $language, 'token' => $user->password_reset_token], true);
+        	$verify_url = Url::to(['site/active-user', 'lang' => 'en', 'token' => $user->password_reset_token], true);
         	//         $verify_url = "http://testdev.chumenwenwen.com/verify.html?token=" . $this->generateToken();
         	
         	$mail_body = str_replace('@url', $verify_url,
         			str_replace('@name', $request['username'],
-        					$this->mail_body[$language]['register']));
+        					$this->mail_body['en']['register']));
         	
-        	$send_mail_result = $this->sendMail($request['email'], $this->mail_subject[$language]['register'], $mail_body);
+        	$send_mail_result = $this->sendMail($request['email'], $this->mail_subject['en']['register'], $mail_body);
         	
         	return $send_mail_result;
         } else {
-        	return $this->render('signup', [
-        			'model' => $model,
-        	]);
+        	return $this->render('signup');
         }
         
     }
@@ -426,7 +428,7 @@ class SiteController extends Controller
     		throw new InvalidParamException('Wrong token.');
     	}
     
-    	$user = User::findOne([
+    	$user = UserData::findOne([
     			'password_reset_token' => $token,
     			'status' => -1,
     	]);

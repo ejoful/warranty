@@ -59,7 +59,6 @@ $(".btn-primary").click(function(){
 					email: $('#signupform-email').val(),
 					password: $('#signupform-password').val(),
 					_csrf: $('meta[name=csrf-token]').attr('content'),
-					language: $('html').attr('lang'),
 				},
 			dataType: 'json',
 			success: function(data) {
