@@ -28,45 +28,49 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-             'consumer_name',
-             'consumer_phone',
-             'email:email',
-             'watch_id',
-             //'status',
-             'create_time:datetime',
-             'update_time:datetime',
-             [
-                'attribute' => 'firstlevel_problem',
-                'value'=> function ($model) {
-                return Fp::item($model->firstlevel_problem);
-                },
-                'filter'=>Fp::items(),
-            ],
-            [
-                'attribute' => 'secondlevel_problem',
-                'value'=> function ($model) {
-                return Sp::item($model->firstlevel_problem,$model->secondlevel_problem);
-                },
-                'filter'=>Sp::items($searchModel->firstlevel_problem),
-            ],
-             'problem_des:ntext',
-             'video',
-             [
-                'attribute' => 'country',
-                'value'=> function ($model) {
-                return Country::item($model->country);
-                },
-                'filter'=>Country::items(),
-            ],
-             'address',
-             [
-                'attribute' => 'status',
-                'value'=> function ($model) {
-                return Lookup::item('ReviewStatus',$model->status);
-                },
-                'filter'=>Lookup::items('ReviewStatus'),
-            ],
+//             'id',
+            'consumer_name',
+//             'consumer_phone',
+            'watch_id',
+            'email:email',
+			[
+				'attribute' => 'firstlevel_problem',
+				'value'=> function ($model) {
+					return Fp::item($model->firstlevel_problem);
+				},
+				'filter'=>Fp::items(),
+			],
+			[
+				'attribute' => 'secondlevel_problem',
+				'value'=> function ($model) {
+					return Sp::item($model->firstlevel_problem,$model->secondlevel_problem);
+				},
+				'filter'=>Sp::items($searchModel->firstlevel_problem),
+			],
+			[
+				'attribute' => 'country',
+				'value'=> function ($model) {
+					return Country::item($model->country);
+				},
+				'filter'=>Country::items(),
+			],
+			[
+				'attribute' => 'status',
+				'value'=> function ($model) {
+					return Lookup::item('ReviewStatus',$model->status);
+				},
+				'filter'=>Lookup::items('ReviewStatus'),
+			],
+            // 'address',
+            // 'zip_code',
+            // 'certificate:ntext',
+            // 'problem_des:ntext',
+            // 'video',
+            // 'create_time',
+            // 'update_time',
+            // 'wwid',
+            // 'reviewerid',
+            // 'logisid',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
