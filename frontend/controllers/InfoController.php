@@ -94,8 +94,9 @@ class InfoController extends Controller
 
     public function actionInfoInsert(){
         $model = new FormInfo();
-        $post = Yii::$app->request->post();
+        echo "2222";
         if($model->load(Yii::$app->request->post())) {
+            echo "1111";
             if($model->save()){
                 return "success";
             }
