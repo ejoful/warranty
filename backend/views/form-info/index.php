@@ -72,7 +72,23 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'reviewerid',
             // 'logisid',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+	            'class' => 'yii\grid\ActionColumn',
+	            'header' => '操作',
+	            'template' => '{view} {update} {delete} {Approve} {Reject} {Info_Request}',
+	            'buttons' => [
+	            	'Approve' => function ($url, $model, $key) {
+	            		return Html::a('<span class="btn btn-success btn-xs">Approve</span>', $url, ['title' => '审核通过'] );
+					},
+					'Reject' => function ($url, $model, $key) {
+						return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '审核通过'] );
+					},
+					'Info_Request' => function ($url, $model, $key) {
+						return Html::a('<span class="btn btn-info btn-xs">Approve</span>', $url, ['title' => '审核通过'] );
+					},
+	            ],
+	            'headerOptions' => ['width' => '80'],
+           ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

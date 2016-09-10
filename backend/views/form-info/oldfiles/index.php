@@ -68,7 +68,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>Lookup::items('ReviewStatus'),
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+            		'class' => 'yii\grid\ActionColumn',
+            		'header' => '操作',
+            		'template' => '{audit}',
+            		'buttons' => [
+		            	'audit' => function ($url, $model, $key) {
+		            		return $model->status == 'editable' ?
+		            		Html::a('<span class="glyphicon glyphicon-user"></span>', $url, ['title' => '审核'] ) : '';
+		            		},
+	            	],
+	            	'headerOptions' => ['width' => '80'],
+	        ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
