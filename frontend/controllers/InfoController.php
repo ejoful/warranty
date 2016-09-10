@@ -11,6 +11,7 @@ use backend\models\Fp;
 use backend\models\Sp;
 use backend\models\Check;
 use backend\models\Country;
+use backend\models\FormInfo;
 /**
  * InfoController implements the CRUD actions for Info model.
  */
@@ -89,5 +90,16 @@ class InfoController extends Controller
             $list.="<p>".$check->des."</p>";
         }
         return $list;
+    }
+
+    public function actionInfoInsert(){
+        $model = new FormInfo();
+        $post = Yii::$app->request->post();
+        if($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                return "success";
+            }
+        }
+        return "error";
     }
 }

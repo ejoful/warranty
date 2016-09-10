@@ -85,7 +85,9 @@ a:hover{
 .self-check,
 .self-define,
 .yes-after,
-.user-form{
+.user-form,
+.form-submit-us,
+.form-submit-nous{
     display: none;
     margin-top: 30px;
 }
@@ -160,4 +162,15 @@ input[type="file"]{
 }
 .user-form .upload-proof-p{
     margin-top: 30px;
+}
+.form-submit-us a,
+.form-submit-nous a{
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+}
+.form-submit-nous .beijing-address{
+    width: 43%;
+    margin: 40px auto;
+    font-size: 22px;
 }
