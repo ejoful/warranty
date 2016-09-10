@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016-09-08 21:28:03
+-- Generation Time: 2016-09-10 11:47:04
 -- 服务器版本： 10.0.27-MariaDB
 -- PHP Version: 5.6.23
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `tbl_check` (
   `spid` int(11) NOT NULL COMMENT '二级问题类别',
   `des` text NOT NULL COMMENT '检查步骤',
   `position` int(11) NOT NULL COMMENT '显示顺序'
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `tbl_check`
@@ -82,31 +82,33 @@ DROP TABLE IF EXISTS `tbl_form_info`;
 CREATE TABLE IF NOT EXISTS `tbl_form_info` (
   `id` int(11) NOT NULL COMMENT '序号',
   `consumer_name` varchar(100) NOT NULL COMMENT '用户姓名',
-  `consumer_phone` varchar(11) NOT NULL COMMENT '用户电话',
+  `consumer_phone` varchar(30) NOT NULL COMMENT '用户电话',
   `watch_id` varchar(100) NOT NULL COMMENT '手表sn码',
   `email` varchar(200) NOT NULL COMMENT '用户邮箱',
   `country` int(11) NOT NULL COMMENT '收货国家',
   `address` varchar(200) NOT NULL COMMENT '收货地址',
-  `firstlevel_problem` int(11) NOT NULL COMMENT '问题类别',
+  `zip_code` varchar(20) NOT NULL COMMENT '邮编',
+  `firstlevel_problem` int(11) DEFAULT NULL COMMENT '问题类别',
   `secondlevel_problem` int(11) DEFAULT NULL COMMENT '问题描述',
+  `certificate` text NOT NULL COMMENT '凭证',
   `problem_des` text COMMENT '问题详细描述',
   `video` varchar(255) DEFAULT NULL COMMENT '视频链接',
   `create_time` datetime NOT NULL COMMENT '问题提交日期',
-  `status` int(11) NOT NULL COMMENT '审核状态',
-  `update_time` datetime NOT NULL COMMENT '问题审核日期',
-  `wwid` int(11) NOT NULL COMMENT '问问id',
-  `reviewerid` int(11) NOT NULL COMMENT '审核人员',
-  `logisid` int(11) NOT NULL COMMENT '物流人员'
+  `status` tinyint(4) DEFAULT NULL COMMENT '审核状态',
+  `update_time` datetime DEFAULT NULL COMMENT '问题审核日期',
+  `wwid` varchar(100) NOT NULL COMMENT '问问id',
+  `reviewerid` int(11) DEFAULT NULL COMMENT '审核人员',
+  `logisid` int(11) DEFAULT NULL COMMENT '物流人员'
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `tbl_form_info`
 --
 
-INSERT INTO `tbl_form_info` (`id`, `consumer_name`, `consumer_phone`, `watch_id`, `email`, `country`, `address`, `firstlevel_problem`, `secondlevel_problem`, `problem_des`, `video`, `create_time`, `status`, `update_time`, `wwid`, `reviewerid`, `logisid`) VALUES
-(1, 'wf', '18811717528', '232', '771569533@qq.com', 1, 'center', 1, 6, 'dfdfdf', 'www.baidu.com', '2016-09-07 19:20:00', 1, '2016-09-07 19:20:00', 0, 0, 0),
-(2, 'z', 'z', 'z', 'z', 1, 'z', 1, 6, '<p>zzz</p><p><img></p>', 'z', '2016-09-07 06:30:00', 1, '2016-09-07 20:45:00', 0, 0, 0),
-(3, 'w', 'w', 'w', 'w', 1, 'w', 1, 6, '<p>www</p><p><img></p>', 'w', '2016-09-07 20:50:00', 1, '2016-09-01 03:30:00', 0, 0, 0);
+INSERT INTO `tbl_form_info` (`id`, `consumer_name`, `consumer_phone`, `watch_id`, `email`, `country`, `address`, `zip_code`, `firstlevel_problem`, `secondlevel_problem`, `certificate`, `problem_des`, `video`, `create_time`, `status`, `update_time`, `wwid`, `reviewerid`, `logisid`) VALUES
+(1, 'wf', '18811717528', '232', '771569533@qq.com', 1, 'center', '', 1, 6, '', 'dfdfdf', 'www.baidu.com', '2016-09-07 19:20:00', 1, '2016-09-07 19:20:00', '0', 0, 0),
+(2, 'z', 'z', 'z', 'z', 1, 'z', '', 1, 6, '', '<p>zzz</p><p><img></p>', 'z', '2016-09-07 06:30:00', 1, '2016-09-07 20:45:00', '0', 0, 0),
+(3, 'w', 'w', 'w', 'w', 1, 'w', '', 1, 6, '', '<p>www</p><p><img></p>', 'w', '2016-09-07 20:50:00', 1, '2016-09-01 03:30:00', '0', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -336,7 +338,15 @@ CREATE TABLE IF NOT EXISTS `tbl_user_data` (
   `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `tbl_user_data`
+--
+
+INSERT INTO `tbl_user_data` (`id`, `wwid`, `username`, `email`, `phone`, `auth_key`, `password_hash`, `password_reset_token`, `status`, `created_at`, `updated_at`) VALUES
+(16, '', '898150165@qq.com', '898150165@qq.com', NULL, '', '123456', 'i4dshVnCY1nZjTw1xBnmdlSbmX0Z_q9Q_1473423252', -1, 1473423252, 1473423252),
+(17, '', 'yaoyang@mobvoi.com', 'yaoyang@mobvoi.com', NULL, '', '123456', 'Q33vEoUUkTsPTJ1QmlY2E8FI2JJT9tQz_1473423294', -1, 1473423294, 1473423294);
 
 --
 -- Indexes for dumped tables
@@ -436,7 +446,7 @@ ALTER TABLE `tbl_user_data`
 -- AUTO_INCREMENT for table `tbl_check`
 --
 ALTER TABLE `tbl_check`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_country`
 --
@@ -476,7 +486,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_data`
 --
 ALTER TABLE `tbl_user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- 限制导出的表
 --

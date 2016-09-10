@@ -13,7 +13,9 @@ use backend\models\Lookup;
 
     <?php $form = ActiveForm::begin(); ?>
 	
-	<?= $form->field($model, 'consumer_name') ?>
+	<label class="control-label" for="forminfo-consumer_name">用户姓名</label>
+	<div><?= $mdoel->consumer_name; ?></div>
+	
     <?= $form->field($model, 'consumer_name')->textInput(['maxlength' => true]) ?>
 
     <?php // $form->field($model, 'consumer_phone')->textInput(['maxlength' => true]) ?>
