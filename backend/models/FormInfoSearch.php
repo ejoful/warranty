@@ -18,8 +18,8 @@ class FormInfoSearch extends FormInfo
     public function rules()
     {
         return [
-            [['id', 'country', 'firstlevel_problem', 'secondlevel_problem', 'status', 'wwid', 'reviewerid', 'logisid'], 'integer'],
-            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'address', 'problem_des', 'video', 'create_time', 'update_time'], 'safe'],
+            [['id', 'country', 'firstlevel_problem', 'secondlevel_problem', 'status', 'reviewerid', 'logisid'], 'integer'],
+            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'address', 'zip_code', 'certificate', 'problem_des', 'video', 'create_time', 'update_time', 'wwid'], 'safe'],
         ];
     }
 
@@ -66,7 +66,6 @@ class FormInfoSearch extends FormInfo
             'create_time' => $this->create_time,
             'status' => $this->status,
             'update_time' => $this->update_time,
-            'wwid' => $this->wwid,
             'reviewerid' => $this->reviewerid,
             'logisid' => $this->logisid,
         ]);
@@ -76,8 +75,11 @@ class FormInfoSearch extends FormInfo
             ->andFilterWhere(['like', 'watch_id', $this->watch_id])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'zip_code', $this->zip_code])
+            ->andFilterWhere(['like', 'certificate', $this->certificate])
             ->andFilterWhere(['like', 'problem_des', $this->problem_des])
-            ->andFilterWhere(['like', 'video', $this->video]);
+            ->andFilterWhere(['like', 'video', $this->video])
+            ->andFilterWhere(['like', 'wwid', $this->wwid]);
 
         return $dataProvider;
     }

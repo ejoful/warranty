@@ -39,8 +39,8 @@ AppAsset::register($this);
         ['label' => 'ReturnProduct', 'url' => ['/info/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'MyHistory', 'url' => ['/info/index','id'=>Yii::$app->user->id]];
         $menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',

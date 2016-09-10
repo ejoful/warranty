@@ -29,9 +29,13 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'address') ?>
 
+    <?php // echo $form->field($model, 'zip_code') ?>
+
     <?php // echo $form->field($model, 'firstlevel_problem') ?>
 
     <?php // echo $form->field($model, 'secondlevel_problem') ?>
+
+    <?php // echo $form->field($model, 'certificate') ?>
 
     <?php // echo $form->field($model, 'problem_des') ?>
 

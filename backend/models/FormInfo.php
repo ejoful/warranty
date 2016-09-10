@@ -16,6 +16,7 @@ use Yii;
  * @property string $address
  * @property integer $firstlevel_problem
  * @property integer $secondlevel_problem
+ * @property string $certificate
  * @property string $problem_des
  * @property string $video
  * @property string $create_time
@@ -45,9 +46,9 @@ class FormInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'country', 'address', 'firstlevel_problem', 'create_time', 'status', 'update_time', 'wwid', 'reviewerid', 'logisid'], 'required'],
+            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'country', 'address', 'firstlevel_problem', 'certificate', 'create_time', 'status', 'update_time', 'wwid', 'reviewerid', 'logisid'], 'required'],
             [['country', 'firstlevel_problem', 'secondlevel_problem', 'status', 'wwid', 'reviewerid', 'logisid'], 'integer'],
-            [['problem_des'], 'string'],
+            [['certificate', 'problem_des'], 'string'],
             [['create_time', 'update_time'], 'safe'],
             [['consumer_name', 'watch_id'], 'string', 'max' => 100],
             [['consumer_phone'], 'string', 'max' => 11],
@@ -74,6 +75,7 @@ class FormInfo extends \yii\db\ActiveRecord
             'address' => Yii::t('app', '收货地址'),
             'firstlevel_problem' => Yii::t('app', '问题类别'),
             'secondlevel_problem' => Yii::t('app', '问题描述'),
+            'certificate' => Yii::t('app', '凭证'),
             'problem_des' => Yii::t('app', '问题详细描述'),
             'video' => Yii::t('app', '视频链接'),
             'create_time' => Yii::t('app', '问题提交日期'),
@@ -116,5 +118,18 @@ class FormInfo extends \yii\db\ActiveRecord
     public static function find()
     {
         return new FormInfoQuery(get_called_class());
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->create_time = time();
+                $this->wwid = Yii::$app->session['user']->wwid;
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }
