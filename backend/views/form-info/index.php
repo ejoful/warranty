@@ -72,7 +72,30 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'reviewerid',
             // 'logisid',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+	            'class' => 'yii\grid\ActionColumn',
+	            'header' => '操作',
+	            'template' => '{view} {update} {delete} {approve} {reject} {info_request}',
+	            'buttons' => [
+	            	'approve' => function ($url, $model, $key) {
+	            	$options = array_merge([
+	            			'title' => Yii::t('yii', '审核通过'),
+	            			'aria-label' => Yii::t('yii', 'Approved'),
+	            			'data-confirm' => Yii::t('yii', 'Logistics partner will send the customer with shipping label information.'),
+	            			'data-method' => 'get',
+	            			'data-pjax' => '0',
+	            	]);
+	            		return Html::a('<span class="btn btn-success btn-xs">Approve</span>', $url, $options );
+					},
+					'reject' => function ($url, $model, $key) {
+						return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '拒绝'] );
+					},
+					'info_request' => function ($url, $model, $key) {
+						return Html::a('<span class="btn btn-info btn-xs">Info Request</span>', $url, ['title' => '请求获得更多信息'] );
+					},
+	            ],
+	            'headerOptions' => ['width' => '80'],
+           ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
