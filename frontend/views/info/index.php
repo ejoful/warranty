@@ -89,7 +89,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                 <td><input type="text" class="name"></td>
             </tr>
             <tr>
-                <td class="form-title">Watch ID</td>
+                <td class="form-title">Watch SN</td>
                 <td><input type="text" class="watchid"></td>
             </tr>
             <tr>
@@ -270,7 +270,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             dataType: "text",
             data: {firstlevel_problem: fpid,secondlevel_problem: spid,problem_des: selfProDes,video: videoUrl,consumer_name: name,watch_id: watchid,email:email,consumer_phone:tel,country:country_id,address:address,proof:proof},
             success: function(data){
-                console.log("success");
+                console.log(data);
             }
         });
 
