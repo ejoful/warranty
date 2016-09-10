@@ -75,16 +75,23 @@ $this->params['breadcrumbs'][] = $this->title;
             [
 	            'class' => 'yii\grid\ActionColumn',
 	            'header' => '操作',
-	            'template' => '{view} {update} {delete} {Approve} {Reject} {Info_Request}',
+	            'template' => '{view} {update} {delete} {approve} {reject} {info_request}',
 	            'buttons' => [
-	            	'Approve' => function ($url, $model, $key) {
-	            		return Html::a('<span class="btn btn-success btn-xs">Approve</span>', $url, ['title' => '审核通过'] );
+	            	'approve' => function ($url, $model, $key) {
+	            	$options = array_merge([
+	            			'title' => Yii::t('yii', '审核通过'),
+	            			'aria-label' => Yii::t('yii', 'Approved'),
+	            			'data-confirm' => Yii::t('yii', 'Logistics partner will send the customer with shipping label information.'),
+	            			'data-method' => 'get',
+	            			'data-pjax' => '0',
+	            	]);
+	            		return Html::a('<span class="btn btn-success btn-xs">Approve</span>', $url, $options );
 					},
-					'Reject' => function ($url, $model, $key) {
-						return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '审核通过'] );
+					'reject' => function ($url, $model, $key) {
+						return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '拒绝'] );
 					},
-					'Info_Request' => function ($url, $model, $key) {
-						return Html::a('<span class="btn btn-info btn-xs">Approve</span>', $url, ['title' => '审核通过'] );
+					'info_request' => function ($url, $model, $key) {
+						return Html::a('<span class="btn btn-info btn-xs">Info Request</span>', $url, ['title' => '请求获得更多信息'] );
 					},
 	            ],
 	            'headerOptions' => ['width' => '80'],

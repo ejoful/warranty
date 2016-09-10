@@ -105,6 +105,17 @@ class FormInfoController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    public function actionApprove($id)
+    {
+    	$model = $this->findModel($id);
+    
+    	$model->status = 2;
+    	
+    	$model->save(false);
+    	
+    	return $this->redirect(['index']);
+    }
 
     /**
      * Finds the FormInfo model based on its primary key value.
