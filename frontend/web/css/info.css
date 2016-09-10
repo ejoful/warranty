@@ -174,3 +174,21 @@ input[type="file"]{
     margin: 40px auto;
     font-size: 22px;
 }
+/*js check msg*/
+.self-define .msg{
+    display: none;
+    margin-bottom: 20px;
+    color: red;
+}
+.self-define .redactor-box{
+    margin-bottom: 0;
+}
+.user-form .msg{
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+}
+.user-form .proof-msg{
+    display: none;
+    color: red;
+}

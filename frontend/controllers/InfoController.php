@@ -93,14 +93,33 @@ class InfoController extends Controller
     }
 
     public function actionInfoInsert(){
+        echo date('Y-m-d H:i:s', time());
         $model = new FormInfo();
-        echo "2222";
-        if($model->load(Yii::$app->request->post())) {
-            echo "1111";
-            if($model->save()){
-                return "success";
-            }
+        $post = Yii::$app->request->post();
+        if($post['firstlevel_problem']){
+            $model->firstlevel_problem = $post['firstlevel_problem'];
         }
-        return "error";
+        if($post['secondlevel_problem']){
+            $model->secondlevel_problem = $post['secondlevel_problem'];
+        }
+        if($post['problem_des']){
+            $model->problem_des = $post['problem_des'];
+        }
+        if($post['video']){
+            $model->video = $post['video'];
+        }
+        $model->consumer_name = $post['consumer_name'];
+        $model->watch_id = $post['watch_id'];
+        $model->email = $post['email'];
+        $model->consumer_phone = $post['consumer_phone'];
+        $model->country = $post['country'];
+        $model->address = $post['address'];
+        $model->zip_code = $post['zip_code'];
+        $model->certificate = $post['certificate'];
+        $model->create_time = date('Y-m-d H:i:s', time());
+        //$model->wwid = Yii::$app->session['user']->wwid;
+        $model->wwid = 1;
+        $model->save(false);
+        return "success";
     }
 }

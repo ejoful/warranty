@@ -67,6 +67,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                     'lang' => 'en_cn',
                 ]
             ]) ?>
+            <div class="msg"></div>
             <span class="title">Write down the url of the video that can best help describe the problem:</span>
             <input type="text" class="video-url">
         </div>
@@ -87,18 +88,22 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             <tr>
                 <td class="form-title">Name</td>
                 <td><input type="text" class="name"></td>
-            </tr>
-            <tr>
-                <td class="form-title">Watch SN</td>
-                <td><input type="text" class="watchid"></td>
-            </tr>
-            <tr>
-                <td class="form-title">Email address</td>
-                <td><input type="text" class="email"></td>
+                <td><label class="msg">*</label></td>
             </tr>
             <tr>
                 <td class="form-title">Telephone</td>
                 <td><input type="text" class="tel"></td>
+                <td><label class="msg">*</label></td>
+            </tr>
+            <tr>
+                <td class="form-title">Watch SN</td>
+                <td><input type="text" class="watchid"></td>
+                <td><label class="msg">*</label></td>
+            </tr>
+            <tr>
+                <td class="form-title">Email address</td>
+                <td><input type="text" class="email"></td>
+                <td><label class="msg">*</label></td>
             </tr>
             <tr>
                 <td class="form-title">Shipping country</td>
@@ -109,10 +114,17 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                         <?php }?>
                     </select>
                 </td>
+                <td><label class="msg">*</label></td>
             </tr>
             <tr>
                 <td class="form-title">Shipping address</td>
                 <td><input type="text" class="address"></td>
+                <td><label class="msg">*</label></td>
+            </tr>
+            <tr>
+                <td class="form-title">Zip Code</td>
+                <td><input type="text" class="zip_code"></td>
+                <td><label class="msg">*</label></td>
             </tr>
         </table>
         <p class="upload-proof-p">Upload the purchasing proof of your watch:</p>
@@ -124,6 +136,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                     'lang' => 'en_cn',
                 ]
             ]) ?>
+        <p class="proof-msg"></p>
         <div class="submit">
             <a class="back-btn">Back</a>
             <a class="submit-btn">Submit</a>
@@ -188,8 +201,20 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".line-img .line1").removeClass('active');
         $(".line-img .circle2").removeClass('active');
         $(".action-line .title2").removeClass('active');
+        var flag = $(".flag").val();
+        if($.trim(flag) == "yes"){
+            $(".yes-after").show();
+            $(".line-img .line2").addClass('active');
+            $(".line-img .circle3").addClass('active');
+            $(".action-line .title3").addClass('active');
+            $(".line-img .line1").addClass('active');
+            $(".line-img .circle2").addClass('active');
+            $(".action-line .title2").addClass('active');
+        }
+        else{
+            $(".sel-pro").show();
+        }
         $(".self-define").hide();
-        $(".sel-pro").show();
     });
     $(".self-check .yes-no .back-btn").on('click', function() {
         $(".line-img .line1").removeClass('active');
@@ -204,6 +229,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".action-line .title3").addClass('active');
         $(".self-check").hide();
         $(".yes-after").show();
+        $(".flag").val("yes");
     });
     $(".yes-no .no-btn").on('click', function() {
         $(".self-check").hide();
@@ -218,7 +244,15 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".self-define").show();
         $(".yes-after").hide();
     });
+    //点击自定义问题下的提交按钮
     $(".self-define .submit-btn").on('click', function() {
+        selfProDes = $(".self-define .redactor-editor").text();
+        if(selfProDes.split(" ").length<20){
+            $(".self-define .msg").html("please fill in the concrete problem description,not less than 20 words.").show();
+            selfProDes = $(".self-define .redactor-editor").focus();
+            return;
+        }
+        $(".self-define .msg").hide();
         $(".flag").val("self-check");
         $(".self-define").hide();
         $(".user-form").show();
@@ -234,6 +268,60 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         }
     });
     $(".user-form .submit-btn").on('click', function() {
+        //获取表单信息
+        var name = $(".user-form .name").val();
+        if(!name){
+            $(".user-form .name").parent().parent().find(".msg").html("name is required!");
+            $(".user-form .name").focus();
+            return;
+        }
+        $(".user-form .name").parent().parent().find(".msg").hide();
+        var tel = $(".user-form .tel").val();
+        if(!tel.match(/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)){
+            $(".user-form .tel").parent().parent().find(".msg").html("telephone is invalid.");
+            $(".user-form .tel").focus();
+            return;
+        }
+        $(".user-form .tel").parent().parent().find(".msg").hide();
+        var watchid = $(".user-form .watchid").val();
+        if(!watchid){
+            $(".user-form .watchid").parent().parent().find(".msg").html("watchid is required!");
+            $(".user-form .watchid").focus();
+            return;
+        }
+        $(".user-form .watchid").parent().parent().find(".msg").hide();
+        var email = $(".user-form .email").val();
+        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            if(!reg.test(email)){
+                $(".user-form .email").parent().parent().find(".msg").html("email is invalid.");
+                $(".email").focus();
+                return;
+            }
+        $(".user-form .email").parent().parent().find(".msg").hide();
+        var country_name = $(".user-form .country option:selected").text();
+        var country_id = $(".user-form .country option:selected").val();
+        var address = $(".user-form .address").val();
+        if(!address){
+            $(".user-form .address").parent().parent().find(".msg").html("address is required!");
+            $(".user-form .address").focus();
+            return;
+        }
+        $(".user-form .address").parent().parent().find(".msg").hide();
+        var zip_code = $(".user-form .zip_code").val();
+        if(!zip_code){
+            $(".user-form .zip_code").parent().parent().find(".msg").html("zip code is required!");
+            $(".user-form .zip_code").focus();
+            return;
+        }
+        $(".user-form .zip_code").parent().parent().find(".msg").hide();
+        var proof = $(".user-form .redactor-editor").html();
+        if($(".user-form .redactor-editor").find("img").length===0 && $(".user-form .redactor-editor").text().split(" ").length<20){
+            $(".user-form .proof-msg").html("please fill in the proof,either images or text(not less than 20 words)").show();
+            $(".user-form .redactor-editor").focus();
+            return;
+        }
+        $(".user-form .proof-msg").hide();
+        //路线
         var flag = $(".flag").val();
         var fpid = "";
         var spid = "";
@@ -253,22 +341,12 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             selfProDes = $(".self-define .redactor-editor").html();
             videoUrl = $(".self-define .video-url").val();
         }
-        //获取表单信息
-        var name = $(".user-form .name").val();
-        var watchid = $(".user-form .watchid").val();
-        var email = $(".user-form .email").val();
-        var tel = $(".user-form .tel").val();
-        var country_name = $(".user-form .country option:selected").text();
-        var country_id = $(".user-form .country option:selected").val();
-        var address = $(".user-form .address").val();
-        var proof = $(".user-form .redactor-editor").html();
-
         //发送ajax请求
         $.ajax({
             url: "<?=Url::to(['info/info-insert'],true)?>",
             type: "post",
             dataType: "text",
-            data: {firstlevel_problem: fpid,secondlevel_problem: spid,problem_des: selfProDes,video: videoUrl,consumer_name: name,watch_id: watchid,email:email,consumer_phone:tel,country:country_id,address:address,proof:proof},
+            data: {firstlevel_problem: fpid,secondlevel_problem: spid,problem_des: selfProDes,video: videoUrl,consumer_name: name,watch_id: watchid,email:email,consumer_phone:tel,country:country_id,address:address,zip_code:zip_code,certificate:proof,_csrf:'<?= Yii::$app->request->csrfToken ?>'},
             success: function(data){
                 console.log(data);
             }
