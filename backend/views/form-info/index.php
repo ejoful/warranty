@@ -57,9 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
 				'attribute' => 'status',
 				'value'=> function ($model) {
-					return Lookup::item('ReviewStatus',$model->status);
+					return Lookup::item('RMAStatus',$model->status);
 				},
-				'filter'=>Lookup::items('ReviewStatus'),
+				'filter'=>Lookup::items('RMAStatus'),
 			],
             // 'address',
             // 'zip_code',

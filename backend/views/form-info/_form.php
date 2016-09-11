@@ -40,7 +40,7 @@ use backend\models\Lookup;
 
     <?php // $form->field($model, 'create_time')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Lookup::items('ReviewStatus')) ?>
+    <?= $form->field($model, 'status')->dropDownList(Lookup::items('RMAStatus')) ?>
 
     <?php // $form->field($model, 'update_time')->textInput() ?>
 
