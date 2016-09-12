@@ -29,6 +29,10 @@ class FormInfoController extends Controller
         ];
     }
 
+    private $URLS = [
+    		'send_mail' => "http://mobvoi-account/mail/mime?origin=warranty.ticwear.com",
+    ];
+    
     /**
      * Lists all FormInfo models.
      * @return mixed
@@ -124,7 +128,26 @@ class FormInfoController extends Controller
     	$model->status = 5;
     	 
     	$model->save(false);
-    	 
+    	
+    	//给用户发拒绝邮件
+    	$email = $model->email;
+    	
+    	$subject = "Rejection of your warranty claim";
+    	
+    	$mail_body = '<div><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">Dear @username,</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">We regret to inform you that you that we cannot approve you warranty.After checking the information you provided, we believe you are responsible for the damage of the product.</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">If you have any further questions, you can contact us by emailing support@</span><span class="J-JK9eJ-PJVNOc" data-g-spell-status="2" id=":114.2" tabindex="-1" role="menuitem" aria-haspopup="true" style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255);">mobvoi</span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">.com with your&nbsp;</span><span class="J-JK9eJ-PJVNOc" data-g-spell-status="2" id=":114.3" tabindex="-1" role="menuitem" aria-haspopup="true" style="font-family: arial, sans-serif; font-size: small; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255);">RMA</span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">&nbsp;number.</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">Thanks!</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">The&nbsp;</span><span class="J-JK9eJ-PJVNOc" data-g-spell-status="2" id=":114.4" tabindex="-1" role="menuitem" aria-haspopup="true" style="font-family: arial, sans-serif; font-size: small; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255);">Ticwatch</span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">&nbsp;Team</span></div>';
+    	
+    	$mail_body = str_replace('@username',$model->consumer_name, $mail_body);
+    	
+    	$send_mail_result = $this->sendMail($email, $subject, $mail_body);
+    		
+    	$res = json_decode($send_mail_result);
+    		
+    	if ($res->err_code != 0 ) {
+    		$msg['status'] = 'error';
+    		$msg['msg'] = '发生了错误...';
+    		error_log('File: ' . __FILE__ . '   Line: ' . __LINE__ . ' Reject email send to ' . $model->email . ' fail.  form info id ' . $model->id);
+    	}
+    	
     	return $this->redirect(['index']);
     }
 
@@ -132,10 +155,29 @@ class FormInfoController extends Controller
     {
     	$model = $this->findModel($id);
     
-    	$model->status = 5;
+    	$model->status = 3;
     
     	$model->save(false);
     
+    	//给用户发请求更多信息邮件
+    	$email = $model->email;
+    	
+    	$subject = "Ask for more information regarding your warranty claim";
+    	
+    	$mail_body = '<div><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">Dear @user,</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">We have received your warranty request but the information you have provided is not clear enough for us to make the decision. Kindly provide the following information:</span><div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br><div><span style="color: rgb(51, 51, 51); font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; font-size: 14px; font-weight: bold;">detailed description</span><br></div><div><span style="color: rgb(51, 51, 51); font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; font-size: 14px; font-weight: bold;">video&nbsp;<span class="J-JK9eJ-PJVNOc" data-g-spell-status="3" id=":114.14" tabindex="-1" role="menuitem" aria-haspopup="true">url</span></span><span style="color: rgb(0, 85, 170); font-family: monospace; font-size: 10.66px; background-color: rgb(229, 229, 229);"><br></span></div><div><span style="color: rgb(51, 51, 51); font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; font-size: 14px; font-weight: bold;">certificate</span><span style="color: rgb(0, 85, 170); font-family: monospace; font-size: 10.66px; background-color: rgb(229, 229, 229);"><br></span></div><div><span style="color: rgb(0, 85, 170); font-family: monospace; font-size: 10.66px; background-color: rgb(229, 229, 229);"><br></span></div><div>You can upload the above information here:</div><div><a href="http://link%20to%20your%20warranty%20ticket/" style="color: rgb(17, 85, 204);">Link to your warranty ticket</a><br><br>Thanks!<br>The&nbsp;<span class="J-JK9eJ-PJVNOc" data-g-spell-status="3" id=":114.15" tabindex="-1" role="menuitem" aria-haspopup="true">Ticwatch</span>&nbsp;Team</div></div></div>';
+    	
+    	$mail_body = str_replace('@username',$model->consumer_name, $mail_body);
+    	
+    	$send_mail_result = $this->sendMail($email, $subject, $mail_body);
+    	
+    	$res = json_decode($send_mail_result);
+    	
+    	if ($res->err_code != 0 ) {
+    		$msg['status'] = 'error';
+    		$msg['msg'] = '发生了错误...';
+    		error_log('File: ' . __FILE__ . '   Line: ' . __LINE__ . ' Reject email send to ' . $model->email . ' fail.  form info id ' . $model->id);
+    	}
+    	
     	return $this->redirect(['index']);
     }
     
@@ -153,5 +195,87 @@ class FormInfoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    /**
+     * post
+     *
+     * @param string $url url
+     * @param string $data_string json string
+     * @return json
+     */
+    public static function http_post_data($url, $data_string='') {
+    
+    	$ch = curl_init();
+    	curl_setopt($ch, CURLOPT_POST, 1);
+    	curl_setopt($ch, CURLOPT_URL, $url);
+    
+    	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    			'Content-Type: application/json; charset=utf-8',
+    			'Content-Length: ' . strlen($data_string))
+    			);
+    
+    	ob_start();
+    	curl_exec($ch);
+    	$return_content = ob_get_contents();
+    	ob_end_clean();
+    
+    	if(curl_error($ch))
+    	{
+    		error_log('File: '. __FILE__ . ' line: ' . __LINE__ . ' Curl error: ' . curl_error($ch));
+    	}
+    
+    	$return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    	curl_close($ch);
+    	return $return_content;
+    }
+    
+    /**
+     * get
+     *
+     * @param string $url url
+     * @return json
+     */
+    public static function http_get_data($url) {
+    
+    	$ch = curl_init();
+    	curl_setopt($ch, CURLOPT_URL, $url);
+    
+    	ob_start();
+    	curl_exec($ch);
+    	$return_content = ob_get_contents();
+    	ob_end_clean();
+    
+    	if(curl_error($ch))
+    	{
+    		error_log('File: '. __FILE__ . ' line: ' . __LINE__ . ' Curl error: ' . curl_error($ch));
+    	}
+    
+    	$return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    	curl_close($ch);
+    	return $return_content;
+    }
+    
+    // send email to some one
+    private function sendMail($to, $subject, $body) {
+    	$post_body = json_encode(
+    			array(
+    					'to' => $to,
+    					'subject' => $subject,
+    					'body' => $body
+    			)
+    			);
+    
+    	$response_str = $this->http_post_data($this->URLS['send_mail'], $post_body);
+    
+    	$response = json_decode($response_str, true);
+    
+    	error_log('File: '. __FILE__ . ' line: ' . __LINE__ . 'sendMail response=' . $response_str);
+    	if ($response['status'] !== 'success') {
+    		error_log('File: '. __FILE__ . ' line: ' . __LINE__ . 'send mail failed, msg=' . $response['err_msg']);
+    	}
+    
+    	return $response_str;
     }
 }
