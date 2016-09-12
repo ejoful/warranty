@@ -6,6 +6,7 @@ use frontend\assets\AppAsset;
 use backend\models\Country;
 use backend\models\Fp;
 use backend\models\Sp;
+use yii\redactor\widgets\Redactor;
 
 AppAsset::addCss($this,"@web/css/history.css");
 /* @var $this yii\web\View */
@@ -40,10 +41,17 @@ AppAsset::addCss($this,"@web/css/history.css");
         Sp::items($model->firstlevel_problem),
         ['prompt' => '请选择'])
     ?>
-
-    <?= $form->field($model, 'problem_des')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'certificate')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'problem_des')->widget(Redactor::className(), [
+      'clientOptions' => [
+        'minHeight' => 300,
+        'lang' => 'zh_cn',
+      ]]) ?>
+    
+    <?= $form->field($model, 'certificate')->widget(Redactor::className(), [
+      'clientOptions' => [
+        'minHeight' => 300,
+        'lang' => 'zh_cn',
+      ]]) ?>
 
     <?= $form->field($model, 'video')->textInput(['maxlength' => true]) ?>
 

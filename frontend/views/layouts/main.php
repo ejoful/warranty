@@ -41,7 +41,7 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    // } else {
+     } else {
         $menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>Yii::$app->user->id]];
         $menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
         'url' => ['/user/security/logout'],
