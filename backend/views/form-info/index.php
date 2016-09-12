@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            'template' => '{view} {update} {delete} {approve} {reject} {info_request}',
 	            'buttons' => [
 	            	'approve' => function ($url, $model, $key) {
-	            		if ($model->status != 4) {
+	            		if ($model->status != 4 && $model->status != 6) {
 	            			$options = array_merge([
 	            					'title' => Yii::t('yii', '审核通过'),
 	            					'aria-label' => Yii::t('yii', 'Approved'),
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            	
 					},
 					'reject' => function ($url, $model, $key) {
-						if ($model->status != 5) {
+						if ($model->status != 5 && $model->status != 6) {
 							$options = array_merge([
 									'title' => Yii::t('yii', '拒绝'),
 									'aria-label' => Yii::t('yii', 'Reject'),
@@ -113,7 +113,6 @@ $this->params['breadcrumbs'][] = $this->title;
 						$options = array_merge([
 								'title' => Yii::t('yii', '请求获得更多信息'),
 								'aria-label' => Yii::t('yii', 'Info Request'),
-								//'data-confirm' => Yii::t('yii', 'Systemt will send the customer with Request more info label information.'),
 								'data-method' => 'get',
 								'data-pjax' => '0',
 						]);
