@@ -1,0 +1,10 @@
+.form-info-index{
+    margin-top: 40px;
+}
+.table tr td:nth-child(5){
+    width: 200px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
