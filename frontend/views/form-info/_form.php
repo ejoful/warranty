@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use frontend\assets\AppAsset;
 use backend\models\Country;
@@ -34,13 +35,16 @@ AppAsset::addCss($this,"@web/css/history.css");
 
     <?= $form->field($model, 'firstlevel_problem')->dropDownList(
         Fp::items(),
-        ['prompt' => '请选择']
+        ['prompt' => 'please select:']
     ) ?>
 
     <?= $form->field($model, 'secondlevel_problem')->dropDownList(
         Sp::items($model->firstlevel_problem),
-        ['prompt' => '请选择'])
+        ['prompt' => 'please select:'])
     ?>
+
+     <?= $form->field($model, 'video')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'problem_des')->widget(Redactor::className(), [
       'clientOptions' => [
         'minHeight' => 300,
@@ -52,8 +56,6 @@ AppAsset::addCss($this,"@web/css/history.css");
         'minHeight' => 300,
         'lang' => 'zh_cn',
       ]]) ?>
-
-    <?= $form->field($model, 'video')->textInput(['maxlength' => true]) ?>
 
     <!-- <?= $form->field($model, 'create_time')->textInput() ?>
 
@@ -72,18 +74,22 @@ AppAsset::addCss($this,"@web/css/history.css");
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
 <script>
         $("#forminfo-firstlevel_problem").change(function () {
             var fid=$("#forminfo-firstlevel_problem").val();
             $.ajax({
-                url: "<?php echo yii::$app->urlManager->createUrl('sp/items'); ?>",
+                url: "<?= yii::$app->urlManager->createUrl(['form-info/items']); ?>",
                 method: "post",
                 data: {fid:fid},
                 success: function (data) {
-                    $("#forminfo-secondlevel_problem").append(data);
+                    console.log(data);
+                    if(data){
+                        $("#forminfo-secondlevel_problem").html(data);
+                    }
+                    else{
+                        $("#forminfo-secondlevel_problem").html("no option");
+                    }
                 }
             });
         });

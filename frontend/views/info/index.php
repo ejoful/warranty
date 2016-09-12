@@ -169,16 +169,27 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         });
     });
     $(".commit .next-btn").on('click', function(){
-        $(".line-img .line1").addClass('active');
-        $(".line-img .circle2").addClass('active');
-        $(".action-line .title2").addClass('active');
+
         var fpele = $("input[name='fp']:checked");
         var fpid = fpele.val();
         var fpdes = fpele.parent().text();
         var spele = $("input[name='sp']:checked");
         var spid = spele.val();
         var spdes = spele.parent().text();
-        if($.trim(fpdes) == "Others" || typeof(spid) == "undefined" || $.trim(spdes) == "Others"){
+
+        if(fpele.length==0){
+            alert("please select one option at least");
+            return;
+        }
+        else if(spele.length==0 && $.trim(fpdes)!="Others"){
+            alert("please select one option in the list of '"+$.trim(fpdes)+"' at least");
+            return;
+        }
+        $(".line-img .line1").addClass('active');
+        $(".line-img .circle2").addClass('active');
+        $(".action-line .title2").addClass('active');
+
+        if($.trim(fpdes) == "Others" || $.trim(spdes) == "Others"){
             $(".sel-pro").hide();
             $(".self-define").show();
         }
@@ -327,20 +338,18 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         var spid = "";
         var selfProDes = "";
         var videoUrl = "";
-        if($.trim(flag) == "no"){
-            //点击了no 获取一级问题和二级问题的id和描述
-            var fpele = $("input[name='fp']:checked");
-            fpid = fpele.val();
-            //var fpdes = fpele.parent().text();
-            var spele = $("input[name='sp']:checked");
-            spid = spele.val();
-            //var spdes = spele.parent().text();
-        }
-        else{
-            //获取文本编辑器的值
-            selfProDes = $(".self-define .redactor-editor").html();
-            videoUrl = $(".self-define .video-url").val();
-        }
+        //点击了no 获取一级问题和二级问题的id和描述
+        var fpele = $("input[name='fp']:checked");
+        fpid = fpele.val();
+        //var fpdes = fpele.parent().text();
+        var spele = $("input[name='sp']:checked");
+        spid = spele.val();
+        //var spdes = spele.parent().text();
+        
+        //获取文本编辑器的值
+        selfProDes = $(".self-define .redactor-editor").html();
+        videoUrl = $(".self-define .video-url").val();
+        
         //发送ajax请求
         $.ajax({
             url: "<?=Url::to(['info/info-insert'],true)?>",

@@ -8,6 +8,7 @@ use frontend\models\FormInfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Sp;
 
 /**
  * FormInfoController implements the CRUD actions for FormInfo model.
@@ -122,5 +123,17 @@ class FormInfoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionItems()
+    {
+        $post = Yii::$app->request->post();
+        $fid = $post['fid'];
+        $models=Sp::items($fid);
+        $option_list="";
+        foreach ($models as $id => $name) {
+            $option_list.="<option value='".$id."'>".$name."</option>";
+        }
+        return $option_list;
     }
 }

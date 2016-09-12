@@ -93,7 +93,6 @@ class InfoController extends Controller
     }
 
     public function actionInfoInsert(){
-        echo date('Y-m-d H:i:s', time());
         $model = new FormInfo();
         $post = Yii::$app->request->post();
         if($post['firstlevel_problem']){
