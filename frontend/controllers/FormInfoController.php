@@ -36,6 +36,8 @@ class FormInfoController extends Controller
     public function actionIndex()
     {
         $searchModel = new FormInfoSearch();
+        $get = Yii::$app->request->get();
+        $searchModel->wwid = $get['id'];
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
