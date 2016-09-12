@@ -14,6 +14,7 @@ use Yii;
  * @property string $email
  * @property integer $country
  * @property string $address
+ * @property string $zip_code
  * @property integer $firstlevel_problem
  * @property integer $secondlevel_problem
  * @property string $certificate
@@ -21,8 +22,9 @@ use Yii;
  * @property string $video
  * @property string $create_time
  * @property integer $status
+ * @property string $email_trace
  * @property string $update_time
- * @property integer $wwid
+ * @property string $wwid
  * @property integer $reviewerid
  * @property integer $logisid
  *
@@ -46,14 +48,16 @@ class FormInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'country', 'address', 'firstlevel_problem', 'certificate', 'create_time', 'status', 'update_time', 'wwid', 'reviewerid', 'logisid'], 'required'],
-            [['country', 'firstlevel_problem', 'secondlevel_problem', 'status', 'wwid', 'reviewerid', 'logisid'], 'integer'],
+            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'country', 'address', 'zip_code', 'certificate', 'create_time', 'wwid'], 'required'],
+            [['country', 'firstlevel_problem', 'secondlevel_problem', 'status', 'reviewerid', 'logisid'], 'integer'],
             [['certificate', 'problem_des'], 'string'],
             [['create_time', 'update_time'], 'safe'],
-            [['consumer_name', 'watch_id'], 'string', 'max' => 100],
-            [['consumer_phone'], 'string', 'max' => 11],
+            [['consumer_name', 'watch_id', 'wwid'], 'string', 'max' => 100],
+            [['consumer_phone'], 'string', 'max' => 30],
             [['email', 'address'], 'string', 'max' => 200],
-            [['video'], 'string', 'max' => 255],
+            [['zip_code'], 'string', 'max' => 20],
+        	[['email_trace'], 'url'],
+            [['video', 'email_trace'], 'string', 'max' => 255],
             [['country'], 'exist', 'skipOnError' => true, 'targetClass' => Country::className(), 'targetAttribute' => ['country' => 'id']],
             [['firstlevel_problem'], 'exist', 'skipOnError' => true, 'targetClass' => Fp::className(), 'targetAttribute' => ['firstlevel_problem' => 'id']],
             [['secondlevel_problem'], 'exist', 'skipOnError' => true, 'targetClass' => Sp::className(), 'targetAttribute' => ['secondlevel_problem' => 'id']],
@@ -73,6 +77,7 @@ class FormInfo extends \yii\db\ActiveRecord
             'email' => Yii::t('app', '用户邮箱'),
             'country' => Yii::t('app', '收货国家'),
             'address' => Yii::t('app', '收货地址'),
+            'zip_code' => Yii::t('app', '邮编'),
             'firstlevel_problem' => Yii::t('app', '问题类别'),
             'secondlevel_problem' => Yii::t('app', '问题描述'),
             'certificate' => Yii::t('app', '凭证'),
@@ -80,6 +85,7 @@ class FormInfo extends \yii\db\ActiveRecord
             'video' => Yii::t('app', '视频链接'),
             'create_time' => Yii::t('app', '问题提交日期'),
             'status' => Yii::t('app', '审核状态'),
+            'email_trace' => Yii::t('app', '联系历史'),
             'update_time' => Yii::t('app', '问题审核日期'),
             'wwid' => Yii::t('app', '问问id'),
             'reviewerid' => Yii::t('app', '审核人员'),

@@ -110,13 +110,35 @@ class FormInfoController extends Controller
     {
     	$model = $this->findModel($id);
     
-    	$model->status = 2;
+    	$model->status = 4;
     	
     	$model->save(false);
     	
     	return $this->redirect(['index']);
     }
+    
+    public function actionReject($id)
+    {
+    	$model = $this->findModel($id);
+    
+    	$model->status = 5;
+    	 
+    	$model->save(false);
+    	 
+    	return $this->redirect(['index']);
+    }
 
+    public function actionInforequest($id)
+    {
+    	$model = $this->findModel($id);
+    
+    	$model->status = 5;
+    
+    	$model->save(false);
+    
+    	return $this->redirect(['index']);
+    }
+    
     /**
      * Finds the FormInfo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

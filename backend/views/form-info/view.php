@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'video',
             'create_time',
             'status',
+            'email_trace:email',
             'update_time',
             'wwid',
             'reviewerid',
