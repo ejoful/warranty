@@ -40,13 +40,15 @@ use backend\models\Lookup;
 
     <?php // $form->field($model, 'create_time')->textInput() ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Lookup::items('RMAStatus')) ?>
+    <?php // $form->field($model, 'status')->dropDownList(Lookup::items('RMAStatus')) ?>
 
     <?php // $form->field($model, 'update_time')->textInput() ?>
 
     <?php // $form->field($model, 'wwid')->textInput(['maxlength' => true]) ?>
 
     <?php // $form->field($model, 'reviewerid')->textInput() ?>
+
+	<?php echo $form->field($model, 'email_trace')->textInput(['maxlength' => true]) ?>
 
     <?php // $form->field($model, 'logisid')->textInput() ?>
 

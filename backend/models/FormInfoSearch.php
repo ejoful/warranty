@@ -19,7 +19,7 @@ class FormInfoSearch extends FormInfo
     {
         return [
             [['id', 'country', 'firstlevel_problem', 'secondlevel_problem', 'status', 'reviewerid', 'logisid'], 'integer'],
-            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'address', 'zip_code', 'certificate', 'problem_des', 'video', 'create_time', 'update_time', 'wwid'], 'safe'],
+            [['consumer_name', 'consumer_phone', 'watch_id', 'email', 'address', 'zip_code', 'certificate', 'problem_des', 'video', 'create_time', 'email_trace', 'update_time', 'wwid'], 'safe'],
         ];
     }
 
@@ -79,6 +79,7 @@ class FormInfoSearch extends FormInfo
             ->andFilterWhere(['like', 'certificate', $this->certificate])
             ->andFilterWhere(['like', 'problem_des', $this->problem_des])
             ->andFilterWhere(['like', 'video', $this->video])
+            ->andFilterWhere(['like', 'email_trace', $this->email_trace])
             ->andFilterWhere(['like', 'wwid', $this->wwid]);
 
         return $dataProvider;

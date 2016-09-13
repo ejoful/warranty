@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Form Info'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    
+
+
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -54,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'filter'=>Country::items(),
 			],
+			'email_trace:email',
 			[
 				'attribute' => 'status',
 				'value'=> function ($model) {
@@ -71,31 +75,80 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'wwid',
             // 'reviewerid',
             // 'logisid',
-
             [
 	            'class' => 'yii\grid\ActionColumn',
 	            'header' => '操作',
 	            'template' => '{view} {update} {delete} {approve} {reject} {info_request}',
 	            'buttons' => [
 	            	'approve' => function ($url, $model, $key) {
-	            	$options = array_merge([
-	            			'title' => Yii::t('yii', '审核通过'),
-	            			'aria-label' => Yii::t('yii', 'Approved'),
-	            			'data-confirm' => Yii::t('yii', 'Logistics partner will send the customer with shipping label information.'),
-	            			'data-method' => 'get',
-	            			'data-pjax' => '0',
-	            	]);
-	            		return Html::a('<span class="btn btn-success btn-xs">Approve</span>', $url, $options );
+	            		if ($model->status != 4 && $model->status != 6) {
+	            			$options = array_merge([
+	            					'title' => Yii::t('yii', '审核通过'),
+	            					'aria-label' => Yii::t('yii', 'Approved'),
+	            					'data-confirm' => Yii::t('yii', 'Logistics partner will send the customer with shipping label information.'),
+	            					'data-method' => 'get',
+	            					'data-pjax' => '0',
+	            			]);
+	            			return Html::a('<span class="btn btn-success btn-xs">Approve</span>', $url, $options );
+	            		} else {
+	            			return '';
+	            		}
+	            	
 					},
 					'reject' => function ($url, $model, $key) {
-						return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '拒绝'] );
+						if ($model->status != 5 && $model->status != 6) {
+							$options = array_merge([
+									'title' => Yii::t('yii', '拒绝'),
+									'aria-label' => Yii::t('yii', 'Reject'),
+									//'data-confirm' => Yii::t('yii', 'Systemt will send the customer with Reject label information.'),
+									'data-method' => 'get',
+									'data-pjax' => '0',
+							]);
+// 						return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '拒绝'];
+							return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, $options );
+						} else {
+							return '';
+						}
+						
 					},
 					'info_request' => function ($url, $model, $key) {
-						return Html::a('<span class="btn btn-info btn-xs">Info Request</span>', $url, ['title' => '请求获得更多信息'] );
+						$options = array_merge([
+								'title' => Yii::t('yii', '请求获得更多信息'),
+								'aria-label' => Yii::t('yii', 'Info Request'),
+								'data-method' => 'get',
+								'data-pjax' => '0',
+						]);
+						return Html::a('<span class="btn btn-info btn-xs">Info Request</span>', $url, $options );
 					},
 	            ],
 	            'headerOptions' => ['width' => '80'],
            ],
+           
+           [
+           'class' => 'yii\grid\ActionColumn',
+           'header' => '操作',
+           'template' => '{email_ship}',
+           'buttons' => [
+           		'email_ship' => function ($url, $model, $key) {
+	           		if ($model->status != 4 && $model->status != 6) {
+	           			$options = array_merge([
+	           					'title' => Yii::t('yii', 'Email shiping label'),
+	           					'aria-label' => Yii::t('yii', 'Email shiping label'),
+	           					'data-method' => 'get',
+	           					'data-pjax' => '0',
+	           			]);
+	           			return Html::a('<span class="btn btn-success btn-xs">Email shiping label</span>', $url, $options );
+	           		} else {
+	           			return '';
+	           		}
+           
+           		},
+           		
+           ],
+           	'headerOptions' => ['width' => '80'],
+         ],
+           		
         ],
     ]); ?>
+    
 <?php Pjax::end(); ?></div>

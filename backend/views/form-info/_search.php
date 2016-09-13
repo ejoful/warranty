@@ -45,6 +45,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'status') ?>
 
+    <?php // echo $form->field($model, 'email_trace') ?>
+
     <?php // echo $form->field($model, 'update_time') ?>
 
     <?php // echo $form->field($model, 'wwid') ?>
