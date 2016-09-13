@@ -42,6 +42,7 @@ AppAsset::register($this);
         ['label' => '问题检查表', 'url' => ['/check/index']],
         ['label' => 'Lookup', 'url' => ['/lookup/index']],
         ['label' => '国家表', 'url' => ['/country/index']],
+        ['label' => '用户', 'url' => ['/user/admin/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
