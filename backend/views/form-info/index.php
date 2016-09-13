@@ -13,6 +13,7 @@ use backend\models\Country;
 
 $this->title = Yii::t('app', 'Form Infos');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="form-info-index">
 

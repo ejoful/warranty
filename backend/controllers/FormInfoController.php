@@ -183,6 +183,14 @@ class FormInfoController extends Controller
     	
     	return $this->redirect(['index']);
     }
+
+    public function actionEmail_ship($id)
+    {
+        $model = $this->findModel($id);
+        $to = $model->email;
+        // $title = $model->
+        return $this->render('shipping',['to'=>$to]);
+    }
     
     /**
      * Finds the FormInfo model based on its primary key value.
