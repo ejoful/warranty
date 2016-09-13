@@ -22,7 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Form Info'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    
+
+
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -72,7 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'wwid',
             // 'reviewerid',
             // 'logisid',
-
             [
 	            'class' => 'yii\grid\ActionColumn',
 	            'header' => '操作',
@@ -121,6 +123,32 @@ $this->params['breadcrumbs'][] = $this->title;
 	            ],
 	            'headerOptions' => ['width' => '80'],
            ],
+           
+           [
+           'class' => 'yii\grid\ActionColumn',
+           'header' => '操作',
+           'template' => '{email_ship}',
+           'buttons' => [
+           		'email_ship' => function ($url, $model, $key) {
+	           		if ($model->status != 4 && $model->status != 6) {
+	           			$options = array_merge([
+	           					'title' => Yii::t('yii', 'Email shiping label'),
+	           					'aria-label' => Yii::t('yii', 'Email shiping label'),
+	           					'data-method' => 'get',
+	           					'data-pjax' => '0',
+	           			]);
+	           			return Html::a('<span class="btn btn-success btn-xs">Email shiping label</span>', $url, $options );
+	           		} else {
+	           			return '';
+	           		}
+           
+           		},
+           		
+           ],
+           	'headerOptions' => ['width' => '80'],
+         ],
+           		
         ],
     ]); ?>
+    
 <?php Pjax::end(); ?></div>
