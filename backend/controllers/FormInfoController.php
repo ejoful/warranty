@@ -110,19 +110,31 @@ class FormInfoController extends Controller
         return $this->redirect(['index']);
     }
     
-    public function actionApprove($id)
+    public function actionApprove()
     {
+        $get = Yii::$app->request->get();
+        $id = $get['id'];
     	$model = $this->findModel($id);
     
     	$model->status = 4;
     	
     	$model->save(false);
-    	
-    	return $this->redirect(['index']);
+
+        $page = $get['page'];
+        if($page=="view"){
+            return $this->redirect(['view','id' => $id]);
+        }
+    	else{
+            return $this->redirect(['index','id' => $id]);
+        }
     }
     
     public function actionReject($id)
     {
+        $get = Yii::$app->request->get();
+
+        $page = $get['page'];
+
     	$model = $this->findModel($id);
     
     	$model->status = 5;
@@ -147,7 +159,12 @@ class FormInfoController extends Controller
     		$msg['msg'] = '发生了错误...';
     		error_log('File: ' . __FILE__ . '   Line: ' . __LINE__ . ' Reject email send to ' . $model->email . ' fail.  form info id ' . $model->id);
     	}
-    	
+    	if($page=="view"){
+            return $this->redirect(['view','id' => $id]);
+        }
+        else{
+            return $this->redirect(['index','id' => $id]);
+        }
     	return $this->redirect(['index']);
     }
 

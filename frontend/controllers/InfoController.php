@@ -121,7 +121,4 @@ class InfoController extends Controller
         $model->save(false);
         return "success";
     }
-    public function actionList(){
-        return $this->render('list');
-    }
 }

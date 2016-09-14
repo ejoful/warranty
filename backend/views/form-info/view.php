@@ -2,11 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use backend\assets\AppAsset;
+use backend\models\Sp;
+use backend\models\Fp;
+use backend\models\Lookup;
+AppAsset::addCss($this,"@web/css/info.css");
 /* @var $this yii\web\View */
 /* @var $model backend\models\FormInfo */
 
-$this->title = $model->id;
+$this->title = Yii::t('app', 'warranty service');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Form Infos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -23,6 +27,33 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+
+        <?php 
+            if ($model->status != 4 && $model->status != 6) {
+              echo Html::a(Yii::t('app', 'Approve'), ['approve', 'id' => $model->id,'page' => 'view'], [
+                'class' => 'btn btn-success btn-xs',
+                'title' => Yii::t('yii', '审核通过'),
+                'data' => [
+                    'confirm' => Yii::t('app', 'Logistics partner will send the customer with shipping label information.'),
+                    'method' => 'post',
+                ],
+            ]); 
+        }
+        ?>
+
+        <?php
+            if ($model->status != 5 && $model->status != 6){
+               echo Html::a(Yii::t('app', 'Reject'), ['reject', 'id' => $model->id,'page' => 'view'], [
+                'class' => 'btn btn-warning btn-xs',
+                'title' => Yii::t('yii', '拒绝'),
+                ]);
+            }
+            ?>
+
+        <?= Html::a(Yii::t('app', 'Info Request'), ['form-info', 'id' => $model->id,'page' => 'view'], [
+            'class' => 'btn btn-info btn-xs',
+            'title' => Yii::t('yii', '请求获得更多信息'),
+            ]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -36,13 +67,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'country',
             'address',
             'zip_code',
-            'firstlevel_problem',
-            'secondlevel_problem',
+            [
+                'attribute' => 'firstlevel_problem',
+                'value' => Fp::item($model->firstlevel_problem),
+            ],
+             [
+                'attribute' => 'secondlevel_problem',
+                'value' => Sp::item($model->firstlevel_problem,$model->secondlevel_problem),
+            ],
             'certificate:ntext',
             'problem_des:ntext',
             'video',
             'create_time',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => Lookup::item('RMAStatus',$model->status),
+            ],
             'email_trace:email',
             'update_time',
             'wwid',
