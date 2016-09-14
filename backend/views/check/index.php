@@ -5,12 +5,15 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use backend\models\Fp;
 use backend\models\Sp;
+use frontend\assets\AppAsset;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\CheckSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Checks');
 $this->params['breadcrumbs'][] = $this->title;
+
+AppAsset::addCss($this,"@web/css/check.css"); 
 ?>
 <div class="check-index">
 

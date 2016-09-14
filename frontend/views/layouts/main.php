@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -40,8 +41,8 @@ AppAsset::register($this);
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>1]];
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Signup','url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest,'options'=>['class'=>'signup']];
+        $menuItems[] = ['label' => 'Login','url' => ['/site/login'],'options'=>['class'=>'login']];
      } else {
         $menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
         'url' => ['/user/security/logout'],
@@ -68,7 +69,28 @@ AppAsset::register($this);
         <p class="pull-left">&copy; Mobvoi <?= date('Y') ?></p>
     </div>
 </footer>
-
+<script type="text/javascript">
+    $("#w1 .signup").on('click', function() {
+        console.log("signup come in");
+        $.ajax({
+            url:"<?=Url::to(['site/signup'],true)?>",
+            type:'post',
+            success:function(data){
+                console.log(123);
+            }
+        });
+    });
+    $("#w1 .login").on('click', function() {
+        console.log("login come in");
+        $.ajax({
+            url:"<?=Url::to(['site/signup'],true)?>",
+            type:'post',
+            success:function(data){
+                console.log(123);
+            }
+        });
+    });
+</script>
 <?php $this->endBody() ?>
 </body>
 </html>
