@@ -113,7 +113,9 @@ class FormInfoController extends Controller
     public function actionApprove()
     {
         $get = Yii::$app->request->get();
+
         $id = $get['id'];
+
     	$model = $this->findModel($id);
     
     	$model->status = 4;
@@ -121,6 +123,7 @@ class FormInfoController extends Controller
     	$model->save(false);
 
         $page = $get['page'];
+
         if($page=="view"){
             return $this->redirect(['view','id' => $id]);
         }
@@ -205,7 +208,7 @@ class FormInfoController extends Controller
     {
         $model = $this->findModel($id);
         $to = $model->email;
-        // $title = $model->
+        //$title = $model->
         return $this->render('shipping',['to'=>$to]);
     }
     

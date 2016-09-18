@@ -10,7 +10,7 @@ AppAsset::addCss($this,"@web/css/info.css");
         <table>
             <tr>
                 <td class="title">To:</td>
-                <td><input type="text" class="sl-email" value="<?=$to?>"></td>
+                <td><input type="text" class="sl-email" placeholder="<?=$to?>"></td>
             </tr>
             <tr>
                 <td class="title">Title:</td>
