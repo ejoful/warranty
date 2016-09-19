@@ -15,6 +15,17 @@ use backend\models\Sp;
  */
 class FormInfoController extends Controller
 {
+	private $user;
+	public function init()
+	{
+		parent::init();
+		if(!isset(Yii::$app->session['user'])) {
+			return $this->goHome();
+		} else {
+			$this->user = Yii::$app->session['user'];
+		}
+	}
+	
     /**
      * @inheritdoc
      */
@@ -38,7 +49,7 @@ class FormInfoController extends Controller
     {
         $searchModel = new FormInfoSearch();
         $get = Yii::$app->request->get();
-        $searchModel->wwid = $get['id'];
+        $searchModel->wwid = $this->user->base_info->wwid;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

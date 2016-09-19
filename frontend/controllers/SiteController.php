@@ -470,7 +470,7 @@ class SiteController extends Controller
     		$session->set('user', $user_info);
     			
     		//删除本地保存的用户信息
-    		$user->delete();
+//     		$user->delete();
     			
     	}
     	unset($output->content);

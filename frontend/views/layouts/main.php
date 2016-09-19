@@ -41,11 +41,22 @@ AppAsset::register($this);
     ];
 
     if (empty(Yii::$app->session['user'])) {
-    	$menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>1]];
+    	
     	$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest];
     	$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-    	$menuItems[] = ['label' => 'Logout (' . Yii::$app->session['user']->base_info->username . ')',
+    	$menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>Yii::$app->session['user']->base_info->wwid]];
+    	
+    	$username = '';
+    	if (!empty(Yii::$app->session['user']->base_info->username)) {
+    		$username = Yii::$app->session['user']->base_info->username;
+    	} else if (!empty(Yii::$app->session['user']->base_info->nickname)) {
+    		$username = Yii::$app->session['user']->base_info->nickname;
+    	} else {
+    		$username = Yii::$app->session['user']->base_info->email;
+    	}
+    	
+    	$menuItems[] = ['label' => 'Logout (' . $username . ')',
     			'url' => ['/site/logout'],
     			];
     }

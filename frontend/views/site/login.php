@@ -60,7 +60,7 @@ $(".btn-primary").click(function(){
 					email: $('#loginform-email').val(),
 					password: $('#loginform-password').val(),
 					_csrf: $('meta[name=csrf-token]').attr('content'),
-					language: $('html').attr('lang'),
+					language: 'en',
 				},
 			dataType: 'json',
 			success: function(data) {
