@@ -39,15 +39,17 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'ReturnProduct', 'url' => ['/info/index']],
     ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>1]];
-        $menuItems[] = ['label' => 'Signup','url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest,'options'=>['class'=>'signup']];
-        $menuItems[] = ['label' => 'Login','url' => ['/site/login'],'options'=>['class'=>'login']];
-     } else {
-        $menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-        'url' => ['/user/security/logout'],
-        'linkOptions' => ['data-method' => 'post']];
+
+    if (empty(Yii::$app->session['user'])) {
+    	$menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>1]];
+    	$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest];
+    	$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+    } else {
+    	$menuItems[] = ['label' => 'Logout (' . Yii::$app->session['user']->base_info->username . ')',
+    			'url' => ['/site/logout'],
+    			];
     }
+    
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

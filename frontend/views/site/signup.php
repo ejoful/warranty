@@ -55,7 +55,7 @@ $(".btn-primary").click(function(){
 			url: '<?= Url::to(['site/signup'], true) ?>',
 			method: 'post',
 			data: {
-					username: $('#signupform-email').val(),
+					username: $('#signupform-username').val(),
 					email: $('#signupform-email').val(),
 					password: $('#signupform-password').val(),
 					language: 'en',

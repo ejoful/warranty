@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016-09-08 21:28:50
+-- Generation Time: 2016-09-13 15:02:02
 -- 服务器版本： 10.0.27-MariaDB
 -- PHP Version: 5.6.23
 
@@ -33,8 +33,13 @@ CREATE TABLE IF NOT EXISTS `tbl_check` (
   `spid` int(11) NOT NULL COMMENT '二级问题类别',
   `des` text NOT NULL COMMENT '检查步骤',
   `position` int(11) NOT NULL COMMENT '显示顺序'
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_check`
+--
+
+TRUNCATE TABLE `tbl_check`;
 --
 -- 转存表中的数据 `tbl_check`
 --
@@ -63,6 +68,11 @@ CREATE TABLE IF NOT EXISTS `tbl_country` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
+-- 插入之前先把表清空（truncate） `tbl_country`
+--
+
+TRUNCATE TABLE `tbl_country`;
+--
 -- 转存表中的数据 `tbl_country`
 --
 
@@ -80,31 +90,42 @@ DROP TABLE IF EXISTS `tbl_form_info`;
 CREATE TABLE IF NOT EXISTS `tbl_form_info` (
   `id` int(11) NOT NULL COMMENT '序号',
   `consumer_name` varchar(100) NOT NULL COMMENT '用户姓名',
-  `consumer_phone` varchar(11) NOT NULL COMMENT '用户电话',
+  `consumer_phone` varchar(30) NOT NULL COMMENT '用户电话',
   `watch_id` varchar(100) NOT NULL COMMENT '手表sn码',
   `email` varchar(200) NOT NULL COMMENT '用户邮箱',
   `country` int(11) NOT NULL COMMENT '收货国家',
   `address` varchar(200) NOT NULL COMMENT '收货地址',
-  `firstlevel_problem` int(11) NOT NULL COMMENT '问题类别',
+  `zip_code` varchar(20) NOT NULL COMMENT '邮编',
+  `firstlevel_problem` int(11) DEFAULT NULL COMMENT '问题类别',
   `secondlevel_problem` int(11) DEFAULT NULL COMMENT '问题描述',
+  `certificate` text NOT NULL COMMENT '凭证',
   `problem_des` text COMMENT '问题详细描述',
   `video` varchar(255) DEFAULT NULL COMMENT '视频链接',
   `create_time` datetime NOT NULL COMMENT '问题提交日期',
-  `status` int(11) NOT NULL COMMENT '审核状态',
-  `update_time` datetime NOT NULL COMMENT '问题审核日期',
-  `wwid` int(11) NOT NULL COMMENT '问问id',
-  `reviewerid` int(11) NOT NULL COMMENT '审核人员',
-  `logisid` int(11) NOT NULL COMMENT '物流人员'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `status` tinyint(4) DEFAULT NULL COMMENT '审核状态',
+  `email_trace` varchar(255) DEFAULT NULL COMMENT '联系历史',
+  `update_time` datetime DEFAULT NULL COMMENT '问题审核日期',
+  `wwid` varchar(100) NOT NULL COMMENT '问问id',
+  `reviewerid` int(11) DEFAULT NULL COMMENT '审核人员',
+  `logisid` int(11) DEFAULT NULL COMMENT '物流人员'
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_form_info`
+--
+
+TRUNCATE TABLE `tbl_form_info`;
 --
 -- 转存表中的数据 `tbl_form_info`
 --
 
-INSERT INTO `tbl_form_info` (`id`, `consumer_name`, `consumer_phone`, `watch_id`, `email`, `country`, `address`, `firstlevel_problem`, `secondlevel_problem`, `problem_des`, `video`, `create_time`, `status`, `update_time`, `wwid`, `reviewerid`, `logisid`) VALUES
-(1, 'wf', '18811717528', '232', '771569533@qq.com', 1, 'center', 1, 6, 'dfdfdf', 'www.baidu.com', '2016-09-07 19:20:00', 1, '2016-09-07 19:20:00', 0, 0, 0),
-(2, 'z', 'z', 'z', 'z', 1, 'z', 1, 6, '<p>zzz</p><p><img></p>', 'z', '2016-09-07 06:30:00', 1, '2016-09-07 20:45:00', 0, 0, 0),
-(3, 'w', 'w', 'w', 'w', 1, 'w', 1, 6, '<p>www</p><p><img></p>', 'w', '2016-09-07 20:50:00', 1, '2016-09-01 03:30:00', 0, 0, 0);
+INSERT INTO `tbl_form_info` (`id`, `consumer_name`, `consumer_phone`, `watch_id`, `email`, `country`, `address`, `zip_code`, `firstlevel_problem`, `secondlevel_problem`, `certificate`, `problem_des`, `video`, `create_time`, `status`, `email_trace`, `update_time`, `wwid`, `reviewerid`, `logisid`) VALUES
+(1, 'wf', '18811717528', '232', '771569533@qq.com', 1, 'center', '', 1, 6, '', 'dfdfdf', 'www.baidu.com', '2016-09-07 19:20:00', 4, NULL, '2016-09-07 19:20:00', '0', 0, 0),
+(2, 'z', 'z', 'z', 'z', 1, 'z', '', 1, 6, '', '<p>zzz</p><p><img></p>', 'z', '2016-09-07 06:30:00', 4, NULL, '2016-09-07 20:45:00', '0', 0, 0),
+(3, 'w', 'w', 'w', 'w', 1, 'w', '', 1, 6, '', '<p>www</p><p><img></p>', 'w', '2016-09-07 20:50:00', 5, NULL, '2016-09-01 03:30:00', '0', 0, 0),
+(4, 'liming', '18792512639', 'sdffdsfdsfdsfsdfsdfdsf', 'yaoyang@mobvi.com', 1, 'fdsfdsfdsfsdf', '0115689', NULL, NULL, '<p>Upload&nbsp;the purchasing proof of your watch:<span class="redactor-invisible-space" data-redactor-tag="span" data-redactor-class="redactor-invisible-space" data-verified="redactor">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space" data-redactor-tag="span" data-redactor-class="redactor-invisible-space" data-verified="redactor">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space" data-redactor-tag="span" data-redactor-class="redactor-invisible-space" data-verified="redactor">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space" data-redactor-tag="span" data-redactor-class="redactor-invisible-space" data-verified="redactor">​Upload the purchasing proof of your watch:</span></span></span></span><span class="redactor-invisible-space">​</span></p>', '<p>please fill in the concrete problem description,not less than 20 words.<span>please fill in the concrete problem description,not less than 20 words.</span></p>', 'https://www.youtube.com/watch?v=RqS_PxMHqV8&list=RDMMRqS_PxMHqV8', '2016-09-12 15:09:46', 4, NULL, NULL, '1', NULL, NULL),
+(5, 'l1', '18792512639', 'sdfdsfsdfds', 'q@q.com', 1, 'fsdf', '789456', 1, 6, '<p>​fsd&nbsp;Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​&nbsp;Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​</span></span></span></span></p>', NULL, NULL, '2016-09-12 15:15:35', 5, NULL, NULL, '1', NULL, NULL),
+(6, 'l2', '18792512639', 'sdfsdfdsf', 'w@q.com', 1, 'sdfsdf', 'dsfdsf', NULL, NULL, '<p>​dffs&nbsp;Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​Upload the purchasing proof of your watch:<span class="redactor-invisible-space">​</span></span></span></span></p>', '<p>​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​Write down the url of the video that can best help describe t<span class="redactor-invisible-space">​</span></span></span></span></span></span></span></p>', NULL, '2016-09-12 15:17:15', 5, NULL, NULL, '1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -119,6 +140,11 @@ CREATE TABLE IF NOT EXISTS `tbl_fp` (
   `position` int(11) NOT NULL DEFAULT '0' COMMENT '问题显示顺序'
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_fp`
+--
+
+TRUNCATE TABLE `tbl_fp`;
 --
 -- 转存表中的数据 `tbl_fp`
 --
@@ -148,17 +174,24 @@ CREATE TABLE IF NOT EXISTS `tbl_lookup` (
   `code` int(11) NOT NULL COMMENT '编码',
   `type` varchar(128) NOT NULL COMMENT '类型',
   `position` int(11) NOT NULL COMMENT '显示顺序'
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_lookup`
+--
+
+TRUNCATE TABLE `tbl_lookup`;
 --
 -- 转存表中的数据 `tbl_lookup`
 --
 
 INSERT INTO `tbl_lookup` (`id`, `name`, `code`, `type`, `position`) VALUES
-(14, 'Pending', 1, 'ReviewStatus', 1),
-(15, 'Approved', 2, 'ReviewStatus', 2),
-(16, 'Rejected', 3, 'ReviewStatus', 3),
-(17, 'Shipped', 4, 'ReviewStatus', 4);
+(1, 'Created', 1, 'RMAStatus', 1),
+(2, 'Updated', 2, 'RMAStatus', 2),
+(3, 'Pending', 3, 'RMAStatus', 3),
+(4, 'Approved', 4, 'RMAStatus', 4),
+(5, 'Rejected', 5, 'RMAStatus', 5),
+(6, 'Shipped', 6, 'RMAStatus', 6);
 
 -- --------------------------------------------------------
 
@@ -172,6 +205,11 @@ CREATE TABLE IF NOT EXISTS `tbl_migration` (
   `apply_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_migration`
+--
+
+TRUNCATE TABLE `tbl_migration`;
 --
 -- 转存表中的数据 `tbl_migration`
 --
@@ -210,6 +248,11 @@ CREATE TABLE IF NOT EXISTS `tbl_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- 插入之前先把表清空（truncate） `tbl_profile`
+--
+
+TRUNCATE TABLE `tbl_profile`;
+--
 -- 转存表中的数据 `tbl_profile`
 --
 
@@ -235,6 +278,11 @@ CREATE TABLE IF NOT EXISTS `tbl_social_account` (
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_social_account`
+--
+
+TRUNCATE TABLE `tbl_social_account`;
 -- --------------------------------------------------------
 
 --
@@ -247,8 +295,13 @@ CREATE TABLE IF NOT EXISTS `tbl_sp` (
   `des` varchar(255) DEFAULT NULL COMMENT '二级问题描述',
   `position` int(11) DEFAULT '0' COMMENT '问题显示顺序',
   `fpid` int(11) NOT NULL COMMENT '一级问题分类'
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_sp`
+--
+
+TRUNCATE TABLE `tbl_sp`;
 --
 -- 转存表中的数据 `tbl_sp`
 --
@@ -269,7 +322,8 @@ INSERT INTO `tbl_sp` (`id`, `des`, `position`, `fpid`) VALUES
 (18, 'My battery consumption doesn''t seem to be normal.', 1, 7),
 (19, 'I experience call noise when making/receiving calls from the watch.', 1, 8),
 (20, 'I can''t hear anything from the microphone.', 1, 9),
-(21, '', NULL, 10);
+(21, '', NULL, 10),
+(22, 'Others', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -285,6 +339,11 @@ CREATE TABLE IF NOT EXISTS `tbl_token` (
   `type` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_token`
+--
+
+TRUNCATE TABLE `tbl_token`;
 -- --------------------------------------------------------
 
 --
@@ -308,6 +367,11 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `identity` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '身份'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `tbl_user`
+--
+
+TRUNCATE TABLE `tbl_user`;
 --
 -- 转存表中的数据 `tbl_user`
 --
@@ -334,7 +398,20 @@ CREATE TABLE IF NOT EXISTS `tbl_user_data` (
   `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 插入之前先把表清空（truncate） `tbl_user_data`
+--
+
+TRUNCATE TABLE `tbl_user_data`;
+--
+-- 转存表中的数据 `tbl_user_data`
+--
+
+INSERT INTO `tbl_user_data` (`id`, `wwid`, `username`, `email`, `phone`, `auth_key`, `password_hash`, `password_reset_token`, `status`, `created_at`, `updated_at`) VALUES
+(16, '', '898150165@qq.com', '898150165@qq.com', NULL, '', '123456', 'i4dshVnCY1nZjTw1xBnmdlSbmX0Z_q9Q_1473423252', -1, 1473423252, 1473423252),
+(17, '', 'yaoyang@mobvoi.com', 'yaoyang@mobvoi.com', NULL, '', '123456', 'Q33vEoUUkTsPTJ1QmlY2E8FI2JJT9tQz_1473423294', -1, 1473423294, 1473423294);
 
 --
 -- Indexes for dumped tables
@@ -434,7 +511,7 @@ ALTER TABLE `tbl_user_data`
 -- AUTO_INCREMENT for table `tbl_check`
 --
 ALTER TABLE `tbl_check`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_country`
 --
@@ -444,7 +521,7 @@ ALTER TABLE `tbl_country`
 -- AUTO_INCREMENT for table `tbl_form_info`
 --
 ALTER TABLE `tbl_form_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_fp`
 --
@@ -454,7 +531,7 @@ ALTER TABLE `tbl_fp`
 -- AUTO_INCREMENT for table `tbl_lookup`
 --
 ALTER TABLE `tbl_lookup`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=18;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_social_account`
 --
@@ -464,7 +541,7 @@ ALTER TABLE `tbl_social_account`
 -- AUTO_INCREMENT for table `tbl_sp`
 --
 ALTER TABLE `tbl_sp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '序号',AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
@@ -474,7 +551,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_data`
 --
 ALTER TABLE `tbl_user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- 限制导出的表
 --
