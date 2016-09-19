@@ -129,6 +129,7 @@ class FormInfo extends \yii\db\ActiveRecord
     	if (parent::beforeSave($insert)) {
     		if ($insert) {
     			$this->status = 1;
+    			$this->wwid = Yii::$app->session['user']->base_info->wwid;
     		} else {
     			$this->status = 2;
     		}

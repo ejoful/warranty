@@ -80,7 +80,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
     <div class="yes-after">
         <img src="<?=Url::to('@web/img/yes.png',true)?>">
         <h3 class="info-tip">Glad to help you solve the problem!</h3>
-        <a href="<?=Url::to(['form-info/index'],true);?>">go to check your history</a>
+        <a href="<?=Url::to(['form-info/index','id'=>Yii::$app->session['user']->base_info->wwid],true);?>">go to check your history</a>
         <a href="javascript:void(0)" class="back-self-check">No,my problem isn't solved, I still want to report the problem</a>
     </div>
     <div class="user-form">
@@ -145,13 +145,13 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
     </div>
     <div class="form-submit-us">
         <p>Got it. A shipping label is going to be sent to your email address in x working days,after we verified your case. You may ship your product back to us within 30 days of receiving the shipping label. We will send you a replacement unit once we receive the product and the product is proven to have the problem as you described. Thanks for your patience!</p>
-        <a href="<?=Url::to(['form-info/index'],true);?>">go to check your history</a>
+        <a href="<?=Url::to(['form-info/index','id'=>Yii::$app->session['user']->base_info->wwid],true);?>">go to check your history</a>
     </div>
     <div class="form-submit-nous">
         <p>Your shipping address is outside the United States Due to the limitation of our operations, you will need to ship your own expense to the following address:</p>
         <p class="beijing-address">Daheng Science Tower, 18th Floor 3rd Suzhou Street, Haidian District Beijing, China</p>
         <p>will send you a replacement unit once we receive the product and the product is proven to have the problem as you described. Thanks for your patience!</p>
-        <a href="<?=Url::to(['form-info/index'],true);?>">go to check your history</a>
+        <a href="<?=Url::to(['form-info/index','id'=>Yii::$app->session['user']->base_info->wwid],true);?>">go to check your history</a>
     </div>
 </div>
 <script type="text/javascript">
