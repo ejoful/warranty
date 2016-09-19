@@ -59,6 +59,7 @@ a:hover{
     padding: 10px;
     display: block;
     margin: 0 auto;
+    resize: none;
 }
 .wrap-sl tr {
     margin: 10px;

@@ -85,11 +85,43 @@ class InfoController extends Controller
         ->where(['spid' => $spid])
         ->orderBy('position')
         ->all();
-        $list = '';
+        $list = array();
         foreach ($check as $check) {
-            $list.="<p>".$check->des."</p>";
+            $list[0] = "<p>".$check->des."</p>";
+            $list[1] = $check->id;
+            return json_encode($list);
         }
-        return $list;
+    }
+
+    public function actionCheckStep(){
+        $post = Yii::$app->request->post();
+        $check_id = $post['check_id'];
+        $check = self::getItem($check_id);
+        $yes = $check->yes;
+        return $yes;
+    }
+
+    public function actionCheckNoStep(){
+        $post = Yii::$app->request->post();
+        $check_id = $post['check_id'];
+        $check = self::getItem($check_id);
+        $no = $check->no;
+        return $no;
+    }
+
+    public function actionCheckGoto(){
+        $post = Yii::$app->request->post();
+        $check_id = $post['check_id']+1;
+        $check = self::getItem($check_id);
+        $des = $check->des;
+        return $des;
+    }
+
+    private static function getItem($check_id){
+        $check = Check::find()
+        ->where(['id' => $check_id])
+        ->one();
+        return $check;
     }
 
     public function actionInfoInsert(){

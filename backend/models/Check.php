@@ -12,6 +12,8 @@ use Yii;
  * @property integer $spid
  * @property string $des
  * @property integer $position
+ * @property string $yes
+ * @property string $no
  *
  * @property Fp $fp
  * @property Sp $sp
@@ -35,6 +37,7 @@ class Check extends \yii\db\ActiveRecord
             [['fpid', 'spid', 'des', 'position'], 'required'],
             [['fpid', 'spid', 'position'], 'integer'],
             [['des'], 'string'],
+            [['yes', 'no'], 'string', 'max' => 255],
             [['fpid'], 'exist', 'skipOnError' => true, 'targetClass' => Fp::className(), 'targetAttribute' => ['fpid' => 'id']],
             [['spid'], 'exist', 'skipOnError' => true, 'targetClass' => Sp::className(), 'targetAttribute' => ['spid' => 'id']],
         ];
@@ -51,6 +54,8 @@ class Check extends \yii\db\ActiveRecord
             'spid' => Yii::t('app', '二级问题类别'),
             'des' => Yii::t('app', '检查步骤'),
             'position' => Yii::t('app', '显示顺序'),
+            'yes' => Yii::t('app', 'action yes'),
+            'no' => Yii::t('app', 'action no'),
         ];
     }
 

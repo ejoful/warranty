@@ -208,8 +208,17 @@ class FormInfoController extends Controller
     {
         $model = $this->findModel($id);
         $to = $model->email;
-        //$title = $model->
         return $this->render('shipping',['to'=>$to]);
+    }
+
+    public function actionSend_email()
+    {
+        $get = Yii::$app->request->post();
+        $to = $get['to'];
+        $title = $get['title'];
+        $content = $get['content'];
+        $this->sendMail($to,$title,$content);
+        return "sucess";
     }
     
     /**

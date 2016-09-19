@@ -82,6 +82,9 @@ a:hover{
     border: 1px solid #5480a3;
     text-align: center;
 }
+.user-form .submit .back-btn{
+    display: none;
+}
 .return-product .commit a:hover,
 .self-define .submit a:hover,
 .self-check .yes-no a:hover,

@@ -19,7 +19,7 @@ class CheckSearch extends Check
     {
         return [
             [['id', 'fpid', 'spid', 'position'], 'integer'],
-            [['des'], 'safe'],
+            [['des', 'yes', 'no'], 'safe'],
         ];
     }
 
@@ -65,7 +65,9 @@ class CheckSearch extends Check
             'position' => $this->position,
         ]);
 
-        $query->andFilterWhere(['like', 'des', $this->des]);
+        $query->andFilterWhere(['like', 'des', $this->des])
+            ->andFilterWhere(['like', 'yes', $this->yes])
+            ->andFilterWhere(['like', 'no', $this->no]);
 
         return $dataProvider;
     }

@@ -26,6 +26,10 @@ use backend\models\Sp;
 
     <?= $form->field($model, 'des')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'yes')->textInput(['maxlength' => true]) ?> 
+ 
+   <?= $form->field($model, 'no')->textInput(['maxlength' => true]) ?> 
+
     <?= $form->field($model, 'position')->textInput() ?>
 
     <div class="form-group">
@@ -41,8 +45,12 @@ use backend\models\Sp;
             var fid=$("#check-fpid").val();
             $.ajax({
                 url: "<?php echo yii::$app->urlManager->createUrl('sp/items'); ?>",
-                method: "post",
-                data: {fid:fid},
+                type: 'get',
+                dataType: 'html',
+                data: {
+                    fid:fid,
+                    _csrf:$('meta[name=csrf-token]').attr('content'),
+                },
                 success: function (data) {
                     $("#check-spid").html(data);
                 }

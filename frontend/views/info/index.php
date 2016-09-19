@@ -54,6 +54,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             <a class="yes-btn">Yes</a>
             <a class="no-btn">No</a>
         </div>
+        <input type="hidden" class="check-id" />
     </div>
     <input type="hidden" class="flag">
     <div class="self-define">
@@ -78,7 +79,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
     </div>
     <div class="yes-after">
         <img src="<?=Url::to('@web/img/yes.png',true)?>">
-        <h3>Glad to help you solve the problem!</h3>
+        <h3 class="info-tip">Glad to help you solve the problem!</h3>
         <a href="<?=Url::to(['form-info/index'],true);?>">go to check your history</a>
         <a href="javascript:void(0)" class="back-self-check">No,my problem isn't solved, I still want to report the problem</a>
     </div>
@@ -189,21 +190,27 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".line-img .circle2").addClass('active');
         $(".action-line .title2").addClass('active');
 
-        if($.trim(fpdes) == "Others" || $.trim(spdes) == "Others"){
+        if($.trim(fpdes) == "Others"){
+            spid = 0;
+        }
+
+        if($.trim(spdes) == "Others"){
             $(".sel-pro").hide();
             $(".self-define").show();
+            return;
         }
         else{
             $(".sel-pro").hide();
             $.ajax({
                 url: "<?=Url::to(['info/self-check'],true);?>",
                 type: "post",
-                dataType: 'html',
+                dataType: 'json',
                 data: {spid:spid},
                 success: function(data){
                     $(".self-check .fp-des").html(spdes);
-                    $(".self-check .check-des").html(data);
+                    $(".self-check .check-des").html(data[0]);
                     $(".self-check").show();
+                    $(".check-id").val(data[1]);
                 }
             });
         }
@@ -212,19 +219,19 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".line-img .line1").removeClass('active');
         $(".line-img .circle2").removeClass('active');
         $(".action-line .title2").removeClass('active');
-        var flag = $(".flag").val();
-        if($.trim(flag) == "yes"){
-            $(".yes-after").show();
-            $(".line-img .line2").addClass('active');
-            $(".line-img .circle3").addClass('active');
-            $(".action-line .title3").addClass('active');
-            $(".line-img .line1").addClass('active');
-            $(".line-img .circle2").addClass('active');
-            $(".action-line .title2").addClass('active');
-        }
-        else{
-            $(".sel-pro").show();
-        }
+        // var flag = $(".flag").val();
+        // if($.trim(flag) == "yes"){
+        //     $(".yes-after").show();
+        //     $(".line-img .line2").addClass('active');
+        //     $(".line-img .circle3").addClass('active');
+        //     $(".action-line .title3").addClass('active');
+        //     $(".line-img .line1").addClass('active');
+        //     $(".line-img .circle2").addClass('active');
+        //     $(".action-line .title2").addClass('active');
+        // }
+        // else{
+        $(".sel-pro").show();
+        //}
         $(".self-define").hide();
     });
     $(".self-check .yes-no .back-btn").on('click', function() {
@@ -235,19 +242,76 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".sel-pro").show();
     });
     $(".yes-no .yes-btn").on('click', function() {
+        var check_id = $(".check-id").val();
         $(".line-img .line2").addClass('active');
         $(".line-img .circle3").addClass('active');
         $(".action-line .title3").addClass('active');
-        $(".self-check").hide();
-        $(".yes-after").show();
-        $(".flag").val("yes");
+        $.ajax({
+            url: "<?=Url::to(['info/check-step'],true);?>",
+                type: "post",
+                data: {check_id:check_id},
+                success: function(data){
+                    var arr = data.split("_");
+                    if(arr[0]==0){
+                        $(".self-check").hide();
+                        $(".yes-after").show();
+                        $(".yes-after .info-tip").html(arr[2]);
+                        if(arr[1]=="wrong"){
+                            $(".yes-after .info-tip").css("color","red");
+                        }
+                        $(".flag").val("yes");
+                    }
+                    if(arr[0]==1){
+                        checkGoTo(check_id);
+                    }
+                    if(arr[0]==2){
+                        $(".user-form").show();
+                        $(".self-check").hide();
+                    }
+            }
+        });
     });
-    $(".yes-no .no-btn").on('click', function() {
-        $(".self-check").hide();
-        $(".user-form").show();
-        $(".flag").val("no");
 
+    $(".yes-no .no-btn").on('click', function() {
+        var check_id = $(".check-id").val();
+        $.ajax({
+            url: "<?=Url::to(['info/check-no-step'],true);?>",
+                type: "post",
+                data: {check_id:check_id},
+                success: function(data){
+                    var arr = data.split("_");
+                    if(arr[0]==0){
+                        $(".self-check").hide();
+                        $(".yes-after").show();
+                        $(".yes-after .info-tip").html(arr[2]);
+                        if(arr[1]=="wrong"){
+                            $(".yes-after .info-tip").css("color","red");
+                        }
+                    }
+                    if(arr[0]==1){
+                        checkGoTo(check_id);
+                    }
+                    if(arr[0]==2){
+                        $(".user-form").show();
+                        $(".self-check").hide();
+                        $(".flag").val("yes");
+                    }
+            }
+        });
     });
+
+    function checkGoTo(check_id){
+        $.ajax({
+            url:"<?=Url::to(['info/check-goto'],true);?>",
+            type:"post",
+            data:{check_id:check_id},
+            success:function(data){
+                $(".check-des").html(data);
+                $(".check-id").val(check_id*1+1);
+            }
+        });
+    }
+
     $(".yes-after .back-self-check").on('click', function() {
         $(".line-img .line2").removeClass('active');
         $(".line-img .circle3").removeClass('active');
@@ -263,20 +327,21 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             selfProDes = $(".self-define .redactor-editor").focus();
             return;
         }
+        $(".user-form .submit .back-btn").css("display","inline-block");
         $(".self-define .msg").hide();
-        $(".flag").val("self-check");
+        //$(".flag").val("self-check");
         $(".self-define").hide();
         $(".user-form").show();
     });
     $(".user-form .back-btn").on('click', function() {
-        var flag = $(".flag").val();
+        //var flag = $(".flag").val();
         $(".user-form").hide();
-        if($.trim(flag) == "no"){
-            $(".self-check").show();
-        }
-        else{
+        // if($.trim(flag) == "no"){
+        //     $(".self-check").show();
+        // }
+        // else{
             $(".self-define").show();
-        }
+        //}
     });
     $(".user-form .submit-btn").on('click', function() {
         //获取表单信息

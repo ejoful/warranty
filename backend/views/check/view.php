@@ -42,6 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'spid',
             'des:ntext',
+            'yes', 
+            'no', 
             'position',
         ],
     ]) ?>

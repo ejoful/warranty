@@ -108,8 +108,8 @@ class SpController extends Controller
 
     public function actionItems()
     {
-        $post = Yii::$app->request->post();
-        $fid = $post['fid'];
+        $get = Yii::$app->request->get();
+        $fid = $get['fid'];
         $models=Sp::items($fid);
         $option_list="";
         foreach ($models as $id => $name) {

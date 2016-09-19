@@ -47,6 +47,8 @@ AppAsset::addCss($this,"@web/css/check.css");
             ],
             //'spid',
             'des:ntext',
+            'yes', 
+            'no', 
             'position',
 
             ['class' => 'yii\grid\ActionColumn'],
