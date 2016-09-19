@@ -34,7 +34,7 @@ class Check extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fpid', 'spid', 'des', 'position'], 'required'],
+            [['fpid', 'spid', 'position'], 'required'],
             [['fpid', 'spid', 'position'], 'integer'],
             [['des'], 'string'],
             [['yes', 'no'], 'string', 'max' => 255],
