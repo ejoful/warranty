@@ -22,36 +22,7 @@ use yii\helpers\Url;
  */
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -317,10 +288,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-//         Yii::$app->user->logout();
-		$session = Yii::$app->session;
-		unset($session['user']);
-
+		unset(Yii::$app->session['user']);
         return $this->goHome();
     }
 
@@ -377,21 +345,27 @@ class SiteController extends Controller
         
         
         if (!empty($request['username']) && !empty($request['email']) && !empty($request['password']) && !empty($request['language'])) {
-			$is_exist = UserData::findOne(['email' => $request['email']]);
-			if ($is_exist != null) {
-				$msg['status'] = 'error';
-				$msg['msg'] = "This email address already corresponds to a Mobvoi Account. Please sign in";
-				return json_encode($msg);
+			$user = UserData::findOne(['email' => $request['email']]);
+			if ($user != null) {
+				$user->password_hash = $request['password'];
+				$user->password_reset_token = $this->generateToken();
+				$user->save(false);
+				
+// 				$msg['status'] = 'error';
+// 				$msg['msg'] = "This email address already corresponds to a Mobvoi Account. Please sign in";
+// 				return json_encode($msg);
+			} else {
+				$user = new UserData();
+				$user->username = $request['username'];
+				$user->email = $request['email'];
+				$user->password_hash = $request['password'];
+				$user->password_reset_token = $this->generateToken();
+				$user->status = -1;
+				$user->created_at = time();
+				$user->updated_at = time();
+				$user->save(false);
 			}
-        	$user = new UserData();
-        	$user->username = $request['username'];
-        	$user->email = $request['email'];
-        	$user->password_hash = $request['password'];
-        	$user->password_reset_token = $this->generateToken();
-        	$user->status = -1;
-        	$user->created_at = time();
-        	$user->updated_at = time();
-        	$user->save(false);
+        	
         	
         	// TODO: 需要一个用户从邮箱点进去的页面，完成验证和注册到问问id
         	$verify_url = Url::to(['site/active-user', 'lang' => 'en', 'token' => $user->password_reset_token], true);
