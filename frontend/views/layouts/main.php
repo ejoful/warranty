@@ -37,7 +37,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'ReturnProduct', 'url' => ['/info/index']],
+        // ['label' => 'ReturnProduct', 'url' => ['/info/index']],
     ];
 
     if (empty(Yii::$app->session['user'])) {
@@ -45,6 +45,7 @@ AppAsset::register($this);
     	$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'visible' => Yii::$app->user->isGuest];
     	$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'ReturnProduct', 'url' => ['/info/index']];
     	$menuItems[] = ['label' => 'MyHistory', 'url' => ['/form-info/index','id'=>Yii::$app->session['user']->base_info->wwid]];
     	
     	$username = '';

@@ -155,6 +155,8 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
     </div>
 </div>
 <script type="text/javascript">
+
+    //点击一级菜单
     $(".fp-btn").on('click', function() {
         var fpid = $(this).val();
         $.ajax({
@@ -169,8 +171,9 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             },
         });
     });
-    $(".commit .next-btn").on('click', function(){
 
+    //点击选择问题页面中的下一步
+    $(".commit .next-btn").on('click', function(){
         var fpele = $("input[name='fp']:checked");
         var fpid = fpele.val();
         var fpdes = fpele.parent().text();
@@ -191,16 +194,23 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".action-line .title2").addClass('active');
 
         if($.trim(fpdes) == "Others"){
-            spid = 0;
+            $.ajax({
+                url: "<?=Url::to(['info/get-spid'],true);?>",
+                type: "post",
+                async: false,
+                success: function(data){
+                    spid = parseInt(data);
+                }
+            });
         }
-
-        if($.trim(spdes) == "Others"){
+        if($.trim(spdes) == "Others" && $.trim(fpdes) != "Others"){
             $(".sel-pro").hide();
             $(".self-define").show();
             return;
         }
         else{
             $(".sel-pro").hide();
+            $(".self-define").hide();
             $.ajax({
                 url: "<?=Url::to(['info/self-check'],true);?>",
                 type: "post",
@@ -215,25 +225,21 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             });
         }
     });
+    //点击自定义问题中的回退按钮
     $(".self-define .submit .back-btn").on('click', function() {
-        $(".line-img .line1").removeClass('active');
-        $(".line-img .circle2").removeClass('active');
-        $(".action-line .title2").removeClass('active');
-        // var flag = $(".flag").val();
-        // if($.trim(flag) == "yes"){
-        //     $(".yes-after").show();
-        //     $(".line-img .line2").addClass('active');
-        //     $(".line-img .circle3").addClass('active');
-        //     $(".action-line .title3").addClass('active');
-        //     $(".line-img .line1").addClass('active');
-        //     $(".line-img .circle2").addClass('active');
-        //     $(".action-line .title2").addClass('active');
-        // }
-        // else{
-        $(".sel-pro").show();
-        //}
+        var flag = $(".flag").val();
         $(".self-define").hide();
+        if(flag == "yes"){
+            $(".self-check").show();
+        }
+        else{
+            $(".sel-pro").show();
+            $(".line-img .line1").removeClass('active');
+            $(".line-img .circle2").removeClass('active');
+            $(".action-line .title2").removeClass('active');
+        }
     });
+    //点击检查步骤页面中的回退按钮
     $(".self-check .yes-no .back-btn").on('click', function() {
         $(".line-img .line1").removeClass('active');
         $(".line-img .circle2").removeClass('active');
@@ -241,6 +247,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         $(".self-check").hide();
         $(".sel-pro").show();
     });
+    //点击检查步骤页面中的yes按钮
     $(".yes-no .yes-btn").on('click', function() {
         var check_id = $(".check-id").val();
         $(".line-img .line2").addClass('active');
@@ -253,11 +260,15 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                 success: function(data){
                     var arr = data.split("_");
                     if(arr[0]==0){
-                        $(".self-check").hide();
-                        $(".yes-after").show();
-                        $(".yes-after .info-tip").html(arr[2]);
                         if(arr[1]=="wrong"){
-                            $(".yes-after .info-tip").css("color","red");
+                            alert(arr[2]);
+                            $(".self-check").hide();
+                            $(".user-form").show();
+                        }
+                        else{
+                            $(".yes-after .info-tip").html(arr[2]);
+                            $(".self-check").hide();
+                            $(".yes-after").show();
                         }
                         $(".flag").val("yes");
                     }
@@ -268,10 +279,14 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                         $(".user-form").show();
                         $(".self-check").hide();
                     }
+                    if(arr[0]==3){
+                        $(".self-define").show();
+                        $(".self-check").hide();
+                    }
             }
         });
     });
-
+    //点击检查步骤页面中的no按钮
     $(".yes-no .no-btn").on('click', function() {
         var check_id = $(".check-id").val();
         $.ajax({
@@ -281,12 +296,17 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                 success: function(data){
                     var arr = data.split("_");
                     if(arr[0]==0){
-                        $(".self-check").hide();
-                        $(".yes-after").show();
-                        $(".yes-after .info-tip").html(arr[2]);
                         if(arr[1]=="wrong"){
-                            $(".yes-after .info-tip").css("color","red");
+                            alert(arr[2]);
+                            $(".self-check").hide();
+                            $(".user-form").show();
                         }
+                        else{
+                            $(".yes-after .info-tip").html(arr[2]);
+                            $(".self-check").hide();
+                            $(".yes-after").show();
+                        }
+                        $(".flag").val("yes");
                     }
                     if(arr[0]==1){
                         checkGoTo(check_id);
@@ -299,7 +319,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             }
         });
     });
-
+    //检查步骤页面中用到的公共函数，实现步骤切换
     function checkGoTo(check_id){
         $.ajax({
             url:"<?=Url::to(['info/check-goto'],true);?>",
@@ -311,7 +331,7 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             }
         });
     }
-
+    //
     $(".yes-after .back-self-check").on('click', function() {
         $(".line-img .line2").removeClass('active');
         $(".line-img .circle3").removeClass('active');
@@ -327,22 +347,21 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             selfProDes = $(".self-define .redactor-editor").focus();
             return;
         }
-        $(".user-form .submit .back-btn").css("display","inline-block");
         $(".self-define .msg").hide();
-        //$(".flag").val("self-check");
         $(".self-define").hide();
         $(".user-form").show();
     });
     $(".user-form .back-btn").on('click', function() {
-        //var flag = $(".flag").val();
-        $(".user-form").hide();
-        // if($.trim(flag) == "no"){
-        //     $(".self-check").show();
-        // }
-        // else{
+        var flag = $(".flag").val();
+        if(flag == "yes"){
+            $(".self-check").show();
+        }
+        else{
             $(".self-define").show();
-        //}
+        }
+        $(".user-form").hide();
     });
+    //提交表单
     $(".user-form .submit-btn").on('click', function() {
         //获取表单信息
         var name = $(".user-form .name").val();

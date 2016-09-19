@@ -17,21 +17,22 @@ use backend\models\FormInfo;
  */
 class InfoController extends Controller
 {
+    private $user;
+    public function init()
+    {
+        parent::init();
+        if(!isset(Yii::$app->session['user'])) {
+            return $this->goHome();
+        } else {
+            $this->user = Yii::$app->session['user'];
+        }
+    }
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
-// 			'access' => [
-// 					'class' => AccessControl::className(),
-// 					'rules' => [
-// 							[
-// 									'allow' => true,
-// 									'roles' => ['@'],
-// 							],
-// 					],
-// 			],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -122,6 +123,16 @@ class InfoController extends Controller
         ->where(['id' => $check_id])
         ->one();
         return $check;
+    }
+
+    public function actionGetSpid(){
+        $fp = Fp::find()
+        ->where(['des' => 'Others'])
+        ->one();
+        $sp = Sp::find()
+        ->where(['fpid' => $fp->id])
+        ->one();
+        return $sp->id;
     }
 
     public function actionInfoInsert(){
