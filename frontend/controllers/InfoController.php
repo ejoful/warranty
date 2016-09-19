@@ -159,8 +159,8 @@ class InfoController extends Controller
         $model->zip_code = $post['zip_code'];
         $model->certificate = $post['certificate'];
         $model->create_time = date('Y-m-d H:i:s', time());
-        //$model->wwid = Yii::$app->session['user']->wwid;
-        $model->wwid = 1;
+        $model->wwid = Yii::$app->session['user']->base_info->wwid;
+        $model->status = 1;
         $model->save(false);
         return "success";
     }

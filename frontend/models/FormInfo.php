@@ -125,7 +125,8 @@ class FormInfo extends \yii\db\ActiveRecord
         return new FormInfoQuery(get_called_class());
     }
 
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
     	if (parent::beforeSave($insert)) {
     		if ($insert) {
     			$this->status = 1;
@@ -138,7 +139,8 @@ class FormInfo extends \yii\db\ActiveRecord
     		return false;
     	}
     }
-    public static function item($id){
+    public static function item($id)
+    {
         $model = self::find()
         ->where(['id'=>$id])
         ->one();
