@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'problem_des:html',
             [
                 'attribute' => 'problem_des',
+                'format' => 'html',
                 'value'=> function ($model) {
                     return FormInfo::item($model->id);
                 },
@@ -57,9 +58,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value'=> function ($model) {
-                    return Lookup::item('ReviewStatus',$model->status);
+                    return Lookup::item('RMAStatus',$model->status);
                 },
-                'filter'=>Lookup::items('ReviewStatus'),
+                'filter'=>Lookup::items('RMAStatus'),
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

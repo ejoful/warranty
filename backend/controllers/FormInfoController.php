@@ -40,6 +40,9 @@ class FormInfoController extends Controller
     public function actionIndex()
     {
         $searchModel = new FormInfoSearch();
+        if(Yii::$app->user->identity->user_identity=="物流管理员"){
+            $searchModel->status=4;
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -120,6 +123,8 @@ class FormInfoController extends Controller
     
     	$model->status = 4;
     	
+        $model->update_time = date('Y-m-d H:i:s', time());
+
     	$model->save(false);
 
         $page = $get['page'];
@@ -171,7 +176,7 @@ class FormInfoController extends Controller
     	return $this->redirect(['index']);
     }
 
-    public function actionInforequest($id)
+    public function actionInfo_request($id)
     {
     	$model = $this->findModel($id);
     
@@ -200,8 +205,16 @@ class FormInfoController extends Controller
     		$msg['msg'] = '发生了错误...';
     		error_log('File: ' . __FILE__ . '   Line: ' . __LINE__ . ' Reject email send to ' . $model->email . ' fail.  form info id ' . $model->id);
     	}
-    	
-    	return $this->redirect(['index']);
+        $get = Yii::$app->request->get();
+        $page = $get['page'];
+        
+    	if($page=="view"){
+            echo $page;
+            return $this->redirect(['view','id' => $id]);
+        }
+        else{
+            return $this->redirect(['index','id' => $id]);
+        }
     }
 
     public function actionEmail_ship($id)

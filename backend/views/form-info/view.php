@@ -50,9 +50,13 @@ $this->params['breadcrumbs'][] = $this->title;
             }
             ?>
 
-        <?= Html::a(Yii::t('app', 'Info Request'), ['form-info', 'id' => $model->id,'page' => 'view'], [
+        <?= Html::a(Yii::t('app', 'Info Request'), ['info_request', 'id' => $model->id,'page' => 'view'], [
             'class' => 'btn btn-info btn-xs',
             'title' => Yii::t('yii', '请求获得更多信息'),
+            'data' => [
+                    'confirm' => Yii::t('yii','Send a message to the user for more information.'),
+                    'method' => 'post',
+                ],
             ]) ?>
     </p>
 
@@ -75,8 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'secondlevel_problem',
                 'value' => Sp::item($model->firstlevel_problem,$model->secondlevel_problem),
             ],
-            'certificate:ntext',
-            'problem_des:ntext',
+            'certificate:html',
+            'problem_des:html',
             'video',
             'create_time',
             [

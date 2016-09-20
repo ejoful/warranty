@@ -3,16 +3,16 @@
 use yii\db\Migration;
 use yii\db\Schema;
 
-class m160913_034745_add_user_identity_to_user extends Migration
+class m160920_043521_add_userIdentity_to_tbl_user extends Migration
 {
     public function up()
     {
-		$this->addColumn('{{%user}}', 'user_identity', Schema::TYPE_STRING);
+		$this->addColumn('{{%user}}', 'userIdentity', Schema::TYPE_STRING. "(50) NOT NULL");
     }
 
     public function down()
     {
-       $this->dropColumn('{{%user}}', 'user_identity');
+        $this->dropColumn('{{%user}}', 'userIdentity');
     }
 
     /*

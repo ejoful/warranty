@@ -8,3 +8,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.table tr td:nth-child(5) p{
+    margin: 0 0 0;
+    width: 190px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

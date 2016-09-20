@@ -11,6 +11,7 @@ class User extends BaseUser
         // add user_identity to scenarios
         $scenarios['create'][]   = 'user_identity';
         $scenarios['update'][]   = 'user_identity';
+        $scenarios['search'][]   = 'user_identity';
         $scenarios['register'][] = 'user_identity';
         return $scenarios;
     }

@@ -49,8 +49,6 @@ class FormInfoController extends Controller
     {
         $searchModel = new FormInfoSearch();
         $get = Yii::$app->request->get();
-        print_r($this->user->base_info->wwid);
-        die();
         $searchModel->wwid = $this->user->base_info->wwid;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

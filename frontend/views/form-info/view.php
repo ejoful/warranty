@@ -49,8 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'problem_des',
                 'value'=> FormInfo::item($model->id),
+                'format' => 'html',
             ],
-            'certificate:ntext',
+            'certificate:html',
             'video',
             'create_time',
             'update_time',
@@ -60,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'status',
             [
                 'attribute' => 'status',
-                'value'=> Lookup::item('ReviewStatus',$model->status),
+                'value'=> Lookup::item('RMAStatus',$model->status),
             ],
         ],
     ]) ?>

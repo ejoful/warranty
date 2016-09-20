@@ -13,7 +13,15 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
             'user' => [
-                'class' => 'dektrium\user\Module',
+                    'class' => 'dektrium\user\Module',
+                    'modelMap' => [
+                        'User' => 'backend\models\User',
+                    ],
+                    'enableFlashMessages' => false,
+                    'enableRegistration' => false,
+                    'enableConfirmation' => false,
+                    'emailChangeStrategy' => 'STRATEGY_INSECURE',
+                    'admins' => ['admin'],
             ],
     ],
     'components' => [

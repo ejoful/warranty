@@ -10,4 +10,4 @@
 <?= $form->field($user, 'username')->textInput(['maxlength' => 25]) ?>
 <?= $form->field($user, 'email')->textInput(['maxlength' => 255]) ?>
 <?= $form->field($user, 'password')->passwordInput() ?>
-<?= $form->field($user, 'user_identity')->textInput(['maxlength' => 10]) ?>
+<?= $form->field($user, 'user_identity')->dropDownList(['管理员'=>'管理员','审核管理员'=>'审核管理员','物流管理员'=>'物流管理员']) ?>
