@@ -28,6 +28,8 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         ),
         'k' => 
         array (
+            'kartik\\grid\\' => 12,
+            'kartik\\dialog\\' => 14,
             'kartik\\datetime\\' => 16,
             'kartik\\base\\' => 12,
         ),
@@ -40,6 +42,10 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
+        ),
+        'a' => 
+        array (
+            'arturoliveira\\' => 14,
         ),
         'F' => 
         array (
@@ -92,6 +98,14 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'kartik\\grid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-grid',
+        ),
+        'kartik\\dialog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-dialog',
+        ),
         'kartik\\datetime\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-datetimepicker',
@@ -116,6 +130,10 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
         ),
+        'arturoliveira\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/arturoliveira/yii2-excelview',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
@@ -123,6 +141,13 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
     );
 
     public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
+            ),
+        ),
         'H' => 
         array (
             'HTMLPurifier' => 

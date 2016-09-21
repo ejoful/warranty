@@ -8,6 +8,7 @@ use backend\models\CheckSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CheckController implements the CRUD actions for Check model.
@@ -26,6 +27,19 @@ class CheckController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                        'class' => AccessControl::className(),
+                        'rules' => [
+                                [
+                                        'actions' => ['login', 'error'],
+                                        'allow' => true,
+                                ],
+                                [
+                                        'allow' => true,
+                                        'roles' => ['@'],
+                                ],
+                        ],
+                ],
         ];
     }
 

@@ -8,6 +8,7 @@ use backend\models\SpSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * SpController implements the CRUD actions for Sp model.
@@ -26,6 +27,19 @@ class SpController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                        'class' => AccessControl::className(),
+                        'rules' => [
+                                [
+                                        'actions' => ['login', 'error'],
+                                        'allow' => true,
+                                ],
+                                [
+                                        'allow' => true,
+                                        'roles' => ['@'],
+                                ],
+                        ],
+                ],
         ];
     }
 
