@@ -112,4 +112,31 @@ return array (
       '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
     ),
   ),
+  'scotthuangzl/yii2-export2excel' => 
+  array (
+    'name' => 'scotthuangzl/yii2-export2excel',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@scotthuangzl/export2excel' => $vendorDir . '/scotthuangzl/yii2-export2excel',
+    ),
+  ),
+  '2amigos/yii2-dosamigos-asset-bundle' => 
+  array (
+    'name' => '2amigos/yii2-dosamigos-asset-bundle',
+    'version' => '0.1.0.0',
+    'alias' => 
+    array (
+      '@dosamigos/assets' => $vendorDir . '/2amigos/yii2-dosamigos-asset-bundle',
+    ),
+  ),
+  '2amigos/yii2-table-export-widget' => 
+  array (
+    'name' => '2amigos/yii2-table-export-widget',
+    'version' => '0.1.0.0',
+    'alias' => 
+    array (
+      '@dosamigos/tableexport' => $vendorDir . '/2amigos/yii2-table-export-widget',
+    ),
+  ),
 );

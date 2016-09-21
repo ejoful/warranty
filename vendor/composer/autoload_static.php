@@ -33,6 +33,8 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         ),
         'd' => 
         array (
+            'dosamigos\\tableexport\\' => 22,
+            'dosamigos\\assets\\' => 17,
             'dektrium\\user\\' => 14,
         ),
         'c' => 
@@ -97,6 +99,14 @@ class ComposerStaticInitefe690cca031495d7c9b5c131591c286
         'kartik\\base\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
+        ),
+        'dosamigos\\tableexport\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-table-export-widget',
+        ),
+        'dosamigos\\assets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-dosamigos-asset-bundle',
         ),
         'dektrium\\user\\' => 
         array (

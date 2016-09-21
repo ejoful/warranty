@@ -7,13 +7,16 @@ use backend\models\Lookup;
 use backend\models\Sp;
 use backend\models\Fp;
 use backend\models\Country;
+use dosamigos\tableexport\ButtonTableExport;
+use dosamigos\tableexport\ButtonTableExportAsset;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\FormInfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+ButtonTableExportAsset::register($this);
 $this->title = Yii::t('app', 'Form Infos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<a id="linkId">Export Table as Xml</a>
 <div class="form-info-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -23,7 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <?//= Html::a(Yii::t('app', 'Create Form Info'), ['create'], ['class' => 'btn btn-success']) ?>
     </p> -->
 <?php Pjax::begin(); ?>
-
+<?= ButtonTableExport::widget(
+    [
+        'label' => 'Export Table',
+        'selector' => '#examine',
+        'exportClientOptions' => [
+            'ignoredColumns' => [10, 11],
+            'useDataUri' => false,
+            'url' => \yii\helpers\Url::to('controller/download')
+        ]
+    ]
+);?>
 <?php 
     $user_identity = Yii::$app->user->identity->user_identity;
     if($user_identity == "审核管理员"){
@@ -294,3 +307,11 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     ?>
 <?php Pjax::end(); ?></div>
+<script type="text/javascript">
+    $('#linkId').on('click', function() {
+        $('table').tableExport({
+        type: "csv",
+        useDataUri: true
+    });
+});
+</script>

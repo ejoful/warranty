@@ -247,68 +247,6 @@
         ]
     },
     {
-        "name": "cebe/markdown",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cebe/markdown.git",
-            "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-            "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-            "shasum": ""
-        },
-        "require": {
-            "lib-pcre": "*",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "cebe/indent": "*",
-            "facebook/xhprof": "*@dev",
-            "phpunit/phpunit": "4.1.*"
-        },
-        "time": "2015-03-06 05:28:07",
-        "bin": [
-            "bin/markdown"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "cebe\\markdown\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Creator"
-            }
-        ],
-        "description": "A super fast, highly extensible markdown parser for PHP",
-        "homepage": "https://github.com/cebe/markdown#readme",
-        "keywords": [
-            "extensible",
-            "fast",
-            "gfm",
-            "markdown",
-            "markdown-extra"
-        ]
-    },
-    {
         "name": "ezyang/htmlpurifier",
         "version": "v4.8.0",
         "version_normalized": "4.8.0.0",
@@ -1235,6 +1173,159 @@
             "swift",
             "swiftmailer",
             "yii2"
+        ]
+    },
+    {
+        "name": "cebe/markdown",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cebe/markdown.git",
+            "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+            "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+            "shasum": ""
+        },
+        "require": {
+            "lib-pcre": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "cebe/indent": "*",
+            "facebook/xhprof": "*@dev",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2016-09-14 20:40:20",
+        "bin": [
+            "bin/markdown"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "cebe\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Creator"
+            }
+        ],
+        "description": "A super fast, highly extensible markdown parser for PHP",
+        "homepage": "https://github.com/cebe/markdown#readme",
+        "keywords": [
+            "extensible",
+            "fast",
+            "gfm",
+            "markdown",
+            "markdown-extra"
+        ]
+    },
+    {
+        "name": "2amigos/yii2-dosamigos-asset-bundle",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/2amigos/yii2-dosamigos-asset-bundle.git",
+            "reference": "39316c82cf25a884b9037e758968e1323b4add33"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/2amigos/yii2-dosamigos-asset-bundle/zipball/39316c82cf25a884b9037e758968e1323b4add33",
+            "reference": "39316c82cf25a884b9037e758968e1323b4add33",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2014-09-01 13:43:36",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "dosamigos\\assets\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Antonio Ramirez",
+                "email": "ramirez.cobos@gmail.com",
+                "homepage": "http://2amigos.us"
+            }
+        ],
+        "description": "2amigOS! Asset Bundle for Yii2.",
+        "keywords": [
+            "asset",
+            "component",
+            "extension",
+            "yii"
+        ]
+    },
+    {
+        "name": "2amigos/yii2-table-export-widget",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/2amigos/yii2-table-export-widget.git",
+            "reference": "0af42eda7fdb6fdaea825582bf0be63f368e80c1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/2amigos/yii2-table-export-widget/zipball/0af42eda7fdb6fdaea825582bf0be63f368e80c1",
+            "reference": "0af42eda7fdb6fdaea825582bf0be63f368e80c1",
+            "shasum": ""
+        },
+        "require": {
+            "2amigos/yii2-dosamigos-asset-bundle": "0.1.*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2014-09-01 22:06:17",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "dosamigos\\tableexport\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Antonio Ramirez",
+                "email": "ramirez.cobos@gmail.com",
+                "homepage": "http://2amigos.us"
+            }
+        ],
+        "description": "Table Export Widget for Yii2.",
+        "keywords": [
+            "export",
+            "extension",
+            "widget",
+            "yii"
         ]
     }
 ]

@@ -19,6 +19,8 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'kartik\\datetime\\' => array($vendorDir . '/kartik-v/yii2-widget-datetimepicker'),
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
+    'dosamigos\\tableexport\\' => array($vendorDir . '/2amigos/yii2-table-export-widget'),
+    'dosamigos\\assets\\' => array($vendorDir . '/2amigos/yii2-dosamigos-asset-bundle'),
     'dektrium\\user\\' => array($vendorDir . '/dektrium/yii2-user'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),

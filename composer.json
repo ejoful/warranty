@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
         "kartik-v/yii2-widget-datetimepicker": "*",
-        "yiidoc/yii2-redactor": "*"
+        "yiidoc/yii2-redactor": "*",
+        "2amigos/yii2-table-export-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -8,6 +8,8 @@ use backend\models\FormInfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use dosamigos\tableexport\ButtonTableExport;
+use dosamigos\tableexport\TableExportAction;
 
 /**
  * FormInfoController implements the CRUD actions for FormInfo model.
@@ -33,6 +35,15 @@ class FormInfoController extends Controller
     		'send_mail' => "http://mobvoi-account/mail/mime?origin=warranty.ticwear.com",
     ];
     
+    public function actions()
+    {
+        return [
+            'download' => [
+                'class' => TableExportAction::className()
+            ]
+        ];
+    }
+
     /**
      * Lists all FormInfo models.
      * @return mixed
