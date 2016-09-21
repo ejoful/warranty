@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use backend\models\Lookup;
 use backend\models\Sp;
@@ -17,25 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-info-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <!-- <p>
-        <?//= Html::a(Yii::t('app', 'Create Form Info'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p> -->
 <?php Pjax::begin(); ?>
 
 <?php 
     $user_identity = Yii::$app->user->identity->user_identity;
     if($user_identity == "审核管理员"){
-        echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-//             'id',
+        $gridColumns = [
             'consumer_name',
-//             'consumer_phone',
             'watch_id',
             'email:email',
             [
@@ -67,16 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter'=>Lookup::items('RMAStatus'),
             ],
-            // 'address',
-            // 'zip_code',
-            // 'certificate:ntext',
-            // 'problem_des:ntext',
-            // 'video',
-            // 'create_time',
-            // 'update_time',
-            // 'wwid',
-            // 'reviewerid',
-            // 'logisid',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
@@ -102,11 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             $options = array_merge([
                                     'title' => Yii::t('yii', '拒绝'),
                                     'aria-label' => Yii::t('yii', 'Reject'),
-                                    //'data-confirm' => Yii::t('yii', 'Systemt will send the customer with Reject label information.'),
                                     'data-method' => 'get',
                                     'data-pjax' => '0',
                             ]);
-//                      return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, ['title' => '拒绝'];
                             return Html::a('<span class="btn btn-warning btn-xs">Reject</span>', $url, $options );
                         } else {
                             return '';
@@ -125,14 +102,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'headerOptions' => ['width' => '80'],
            ],
-        ],
-    ]); }
-    else if($user_identity == "物流管理员"){
-        echo GridView::widget([
-        'dataProvider' => $dataProvider,
+    ]; 
+    echo GridView::widget([
+        'id' => 'kv-grid-demo',
+        'dataProvider'=> $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        'columns' => $gridColumns,
+        'exportConfig'=>$exportConfig,
+        'toolbar' => [
+            '{export}',
+            '{toggleData}',
+        ],
+        'showPageSummary'=>$pageSummary,
+        'panel'=>[
+            'type'=>GridView::TYPE_PRIMARY,
+            'heading'=>$heading,
+        ],
+        'persistResize'=>false,
+    ]);
+}
+    else if($user_identity == "物流管理员"){
+        $gridColumns = [
             'consumer_name',
             'watch_id',
             'email:email',
@@ -181,15 +171,27 @@ $this->params['breadcrumbs'][] = $this->title;
            ],
             'headerOptions' => ['width' => '80'],
          ],
-        ],
-    ]);
-    }
-    else if($user_identity == "管理员"){
-        echo GridView::widget([
-        'dataProvider' => $dataProvider,
+   ];
+   echo GridView::widget([
+        'id' => 'kv-grid-demo',
+        'dataProvider'=> $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        'columns' => $gridColumns,
+        'exportConfig'=>$exportConfig,
+        'toolbar' => [
+            '{export}',
+            '{toggleData}',
+        ],
+        'showPageSummary'=>$pageSummary,
+        'panel'=>[
+            'type'=>GridView::TYPE_PRIMARY,
+            'heading'=>$heading,
+        ],
+        'persistResize'=>false,
+    ]);
+}
+    else if($user_identity == "管理员"){
+        $gridColumns = [
             'consumer_name',
             'watch_id',
             'email:email',
@@ -289,8 +291,28 @@ $this->params['breadcrumbs'][] = $this->title;
            ],
             'headerOptions' => ['width' => '80'],
          ],
+    ];
+     echo GridView::widget([
+        'id' => 'kv-grid-demo',
+        'dataProvider'=> $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => $gridColumns,
+        'exportConfig'=>$exportConfig,
+        // 'exportConfig' => [
+        //     GridView::EXCEL => ['label' => 'Save as EXCEL'],
+        //     GridView::CSV => ['label' => 'Save as CSV'],
+        // ],
+        'toolbar' => [
+            '{export}',
+            '{toggleData}',
         ],
+        'showPageSummary'=>$pageSummary,
+        'panel'=>[
+            'type'=>GridView::TYPE_PRIMARY,
+            'heading'=>$heading,
+        ],
+        'persistResize'=>false,
     ]);
-    }
+}
     ?>
 <?php Pjax::end(); ?></div>

@@ -23,6 +23,9 @@ return [
                     'emailChangeStrategy' => 'STRATEGY_INSECURE',
                     'admins' => ['admin'],
             ],
+            'gridview' => [
+                'class' => '\kartik\grid\Module'
+            ]
     ],
     'components' => [
         'request' => [

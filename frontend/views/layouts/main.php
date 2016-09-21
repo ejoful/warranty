@@ -85,22 +85,20 @@ AppAsset::register($this);
 </footer>
 <script type="text/javascript">
     $("#w1 .signup").on('click', function() {
-        console.log("signup come in");
         $.ajax({
             url:"<?=Url::to(['site/signup'],true)?>",
             type:'post',
             success:function(data){
-                console.log(123);
+                console.log("success");
             }
         });
     });
     $("#w1 .login").on('click', function() {
-        console.log("login come in");
         $.ajax({
             url:"<?=Url::to(['site/signup'],true)?>",
             type:'post',
             success:function(data){
-                console.log(123);
+                console.log("success");
             }
         });
     });

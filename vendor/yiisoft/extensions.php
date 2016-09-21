@@ -121,24 +121,6 @@ return array (
       '@scotthuangzl/export2excel' => $vendorDir . '/scotthuangzl/yii2-export2excel',
     ),
   ),
-  '2amigos/yii2-dosamigos-asset-bundle' => 
-  array (
-    'name' => '2amigos/yii2-dosamigos-asset-bundle',
-    'version' => '0.1.0.0',
-    'alias' => 
-    array (
-      '@dosamigos/assets' => $vendorDir . '/2amigos/yii2-dosamigos-asset-bundle',
-    ),
-  ),
-  '2amigos/yii2-table-export-widget' => 
-  array (
-    'name' => '2amigos/yii2-table-export-widget',
-    'version' => '0.1.0.0',
-    'alias' => 
-    array (
-      '@dosamigos/tableexport' => $vendorDir . '/2amigos/yii2-table-export-widget',
-    ),
-  ),
   'kartik-v/yii2-dialog' => 
   array (
     'name' => 'kartik-v/yii2-dialog',
@@ -151,19 +133,19 @@ return array (
   'kartik-v/yii2-grid' => 
   array (
     'name' => 'kartik-v/yii2-grid',
-    'version' => '3.1.2.0',
+    'version' => '9999999-dev',
     'alias' => 
     array (
       '@kartik/grid' => $vendorDir . '/kartik-v/yii2-grid',
     ),
   ),
-  'arturoliveira/yii2-excelview' => 
+  'kartik-v/yii2-mpdf' => 
   array (
-    'name' => 'arturoliveira/yii2-excelview',
-    'version' => '1.0.0.0',
+    'name' => 'kartik-v/yii2-mpdf',
+    'version' => '9999999-dev',
     'alias' => 
     array (
-      '@arturoliveira' => $vendorDir . '/arturoliveira/yii2-excelview',
+      '@kartik/mpdf' => $vendorDir . '/kartik-v/yii2-mpdf',
     ),
   ),
 );
