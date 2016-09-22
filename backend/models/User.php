@@ -25,4 +25,11 @@ class User extends BaseUser
         
         return $rules;
     }
+
+    public static function getName($id){
+        $model=self::find()
+        ->where(['id' => $id])
+        ->one();
+        return $model->username;
+    }
 }

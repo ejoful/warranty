@@ -54,6 +54,7 @@ class FormInfoController extends Controller
     public function actionIndex()
     {
         $searchModel = new FormInfoSearch();
+        //让物流管理员只能看到审核管理员同意后的单子信息
         if(Yii::$app->user->identity->user_identity=="物流管理员"){
             $searchModel->status=4;
         }
@@ -139,6 +140,8 @@ class FormInfoController extends Controller
     	
         $model->update_time = date('Y-m-d H:i:s', time());
 
+        $model->reviewerid = Yii::$app->user->identity->id;
+
     	$model->save(false);
 
         $page = $get['page'];
@@ -160,6 +163,8 @@ class FormInfoController extends Controller
     	$model = $this->findModel($id);
     
     	$model->status = 5;
+
+        $model->reviewerid = Yii::$app->user->identity->id;
     	 
     	$model->save(false);
     	
@@ -195,6 +200,8 @@ class FormInfoController extends Controller
     	$model = $this->findModel($id);
     
     	$model->status = 3;
+
+        $model->reviewerid = Yii::$app->user->identity->id;
     
     	$model->save(false);
     
@@ -234,6 +241,11 @@ class FormInfoController extends Controller
     public function actionEmail_ship($id)
     {
         $model = $this->findModel($id);
+
+        $model->reviewerid = Yii::$app->user->identity->id;
+
+        $model->save(false);
+
         $to = $model->email;
         return $this->render('shipping',['to'=>$to]);
     }

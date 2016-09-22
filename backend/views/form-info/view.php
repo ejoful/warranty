@@ -6,6 +6,7 @@ use backend\assets\AppAsset;
 use backend\models\Sp;
 use backend\models\Fp;
 use backend\models\Lookup;
+use backend\models\User;
 AppAsset::addCss($this,"@web/css/info.css");
 /* @var $this yii\web\View */
 /* @var $model backend\models\FormInfo */
@@ -90,8 +91,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'email_trace:email',
             'update_time',
             'wwid',
-            'reviewerid',
-            'logisid',
+            [
+                'attribute' => 'reviewerid',
+                'value' => User::getName($model->reviewerid),
+            ],
+            [
+                'attribute' => 'logisid',
+                'value' => User::getName($model->logisid),
+            ],
         ],
     ]) ?>
 
