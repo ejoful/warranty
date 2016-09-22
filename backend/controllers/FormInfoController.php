@@ -247,7 +247,10 @@ class FormInfoController extends Controller
         $model->save(false);
 
         $to = $model->email;
-        return $this->render('shipping',['to'=>$to]);
+
+        $name = $model->consumer_name;
+
+        return $this->render('shipping',['to'=>$to,'name'=>$name]);
     }
 
     public function actionSend_email()

@@ -14,15 +14,16 @@ AppAsset::addCss($this,"@web/css/info.css");
             </tr>
             <tr>
                 <td class="title">Title:</td>
-                <td><input type="text" class="sl-title" value="Ask for more information regarding your warranty claim."></td>
+                <td><input type="text" class="sl-title" value="Rejection of your warranty claim RMA"></td>
             </tr>
         </table>  
         <textarea cols="80" rows="15" class="sl-content">
 
 Dear <?=$name?>,
 
-We have received your warranty request but the information you have provided is not clear enough for us to make the decision kindly provide the following information:
-*******
+We regret to inform you that we cannot approve your warranty.After checking the information you provided,we believe you are responsible for the damage of the product.
+
+If you have any further questions,you can contact us by emailing support@mobvoi.com with your RMA number.
 
 Thanks!
 The Ticwatch Team
