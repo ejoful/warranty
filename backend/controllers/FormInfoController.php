@@ -153,25 +153,41 @@ class FormInfoController extends Controller
             return $this->redirect(['index','id' => $id]);
         }
     }
-    
-    public function actionReject($id)
+
+    public function actionReject($id){
+
+        $model = $this->findModel($id);
+
+        $id = $model->id;
+
+        $to = $model->email;
+
+        $name = $model->consumer_name;
+
+        return $this->render('reject_email',['to'=>$to,'name'=>$name,'id'=>$id]);
+
+    }
+
+    public function actionSend_reject()
     {
-        $get = Yii::$app->request->get();
+        $post = Yii::$app->request->post();
 
-        $page = $get['page'];
+        $page = $post['page'];
 
-    	$model = $this->findModel($id);
+        $id = $post['id'];
+
+        $model = $this->findModel($id);
     
-    	$model->status = 5;
+        $model->status = 5;
 
         $model->reviewerid = Yii::$app->user->identity->id;
-    	 
-    	$model->save(false);
+
+        $model->save(false);
     	
     	//给用户发拒绝邮件
     	$email = $model->email;
     	
-    	$subject = "Rejection of your warranty claim";
+    	$subject = $get['content'];
     	
     	$mail_body = '<div><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">Dear @username,</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">We regret to inform you that you that we cannot approve you warranty.After checking the information you provided, we believe you are responsible for the damage of the product.</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">If you have any further questions, you can contact us by emailing support@</span><span class="J-JK9eJ-PJVNOc" data-g-spell-status="2" id=":114.2" tabindex="-1" role="menuitem" aria-haspopup="true" style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255);">mobvoi</span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">.com with your&nbsp;</span><span class="J-JK9eJ-PJVNOc" data-g-spell-status="2" id=":114.3" tabindex="-1" role="menuitem" aria-haspopup="true" style="font-family: arial, sans-serif; font-size: small; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255);">RMA</span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">&nbsp;number.</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">Thanks!</span><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">The&nbsp;</span><span class="J-JK9eJ-PJVNOc" data-g-spell-status="2" id=":114.4" tabindex="-1" role="menuitem" aria-haspopup="true" style="font-family: arial, sans-serif; font-size: small; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255);">Ticwatch</span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: small;">&nbsp;Team</span></div>';
     	
@@ -186,13 +202,14 @@ class FormInfoController extends Controller
     		$msg['msg'] = '发生了错误...';
     		error_log('File: ' . __FILE__ . '   Line: ' . __LINE__ . ' Reject email send to ' . $model->email . ' fail.  form info id ' . $model->id);
     	}
-    	if($page=="view"){
-            return $this->redirect(['view','id' => $id]);
-        }
-        else{
-            return $this->redirect(['index','id' => $id]);
-        }
-    	return $this->redirect(['index']);
+    	// if($page=="view"){
+     //        return $this->redirect(['view','id' => $id]);
+     //    }
+     //    else{
+     //        return $this->redirect(['index','id' => $id]);
+     //    }
+    	// return $this->redirect(['index']);
+        return "success";
     }
 
     public function actionInfo_request($id)
