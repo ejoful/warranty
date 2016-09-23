@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Request password reset';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,15 +18,45 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
 
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                <label class="control-label" for="passwordresetrequestform-email">Email</label>
+                <input type="text" id="passwordresetrequestform-email" class="form-control" name="PasswordResetRequestForm[email]" value="" autofocus="">
+                
+                <p class="help-block help-block-error"></p>
 
                 <div class="form-group">
                     <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+            
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$('.btn-primary').click(function(){
+	$.ajax({
+		url: '<?= Url::to(['site/request-password-reset']) ?>',
+		method: 'post',
+		data: {
+			email: $('#passwordresetrequestform-email').val(),
+			lang: 'en',
+			_csrf: $('meta[name=csrf-token]').attr('content'),
+		},
+		dataType: 'json',
+		success: function(data) {
+			console.log(data);
+			if (data.status == 'success') {
+				alert(data.msg);
+				window.location.href = '<?= Url::to(['site/index'],true) ?>';
+			} else {
+				alert(data.msg);
+			}
+		}
+
+	});
+	
+});
+
+
+</script>
