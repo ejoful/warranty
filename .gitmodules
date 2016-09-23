@@ -1,3 +1,6 @@
 [submodule "vendor/dektrium/yii2-user"]
 	path = vendor/dektrium/yii2-user
 	url = https://github.com/dektrium/yii2-user.git
+[submodule "vendor/kartik-v/yii2-mpdf"]
+	path = vendor/kartik-v/yii2-mpdf
+	url = https://github.com/kartik-v/yii2-mpdf.git

@@ -508,7 +508,31 @@ class SiteController extends Controller
     	return Yii::$app->security->generateRandomString() . '_' . time();
     }
     
+    // get mail token
+    // $usage = register/reset_pwd
+    private  function getMailToken($email, $usage) {
+        $response_str = $this->http_get_data(sprintf($this->URLS['mail_token'], $email, $usage));
+        $response = json_decode($response_str,true);
+        error_log('File: '. __FILE__ . ' line: ' . __LINE__ . 'getMailToken response='. $response_str);
+        //         return $response;
+        //         print_r($response);die();
+        if ($response['status'] == 'success') {
+            return $response['content']['value'];
+        }
+        error_log('File: '. __FILE__ . ' line: ' . __LINE__ . 'get mail token failed, err_msg=' . $response['err_msg']);
+        return '';
+    }
     
+    // verify email token
+    // $usage = register/reset_pwd
+    private function verifyMailToken($token, $email, $usage) {
+        $url = sprintf($this->URLS['mail_token_verify'], $token, $email, $usage);
+        $response_str = $this->http_post_data($url);
+    
+        $response = json_decode($response_str);
+    
+        return $response;
+    }
     
     /**
      * Requests password reset.
@@ -517,22 +541,58 @@ class SiteController extends Controller
      */
     public function actionRequestPasswordReset()
     {
-        echo 123;
-        $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-                return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+        $request = Yii::$app->request->post();
+        
+        if (!empty($request['email']) && !empty($request['lang'])) {
+            //检查用户是否存在
+            $url = sprintf($this->URLS['get_userinfo_byemail'], $request['email']);
+            $user_info_str = SiteController::http_get_data($url);
+            $user_info = json_decode($user_info_str);
+            if ($user_info->err_code != 0) {
+                $msg['status'] = 'error';
+				$msg['msg'] = $this->error_message['100'][$request['lang']];
+				return json_encode($msg);
             }
+            
+            $username = empty($user_info->base_info->nickname) ? 'User' : $user_info->base_info->nickname;
+            //如果用户存在
+            // TODO: 需要一个用户从邮箱点进去的页面，完成验证和注册到问问id
+            $verify_url = Url::to(['site/reset-password', 'lang'=>$request['lang'], 'email'=>$request['email'], 'token' => $this->getMailToken($request['email'], 'reset_pwd')], true);
+            
+            $mail_body = str_replace('@url', $verify_url,
+                str_replace('@name', $username,
+                    $this->mail_body['en']['reset_pwd']));
+            
+            $send_mail_result = $this->sendMail($request['email'], $this->mail_subject[$request['lang']]['reset_pwd'], $mail_body);
+            
+            $res = json_decode($send_mail_result);
+//             print_r($res);die;
+            if ($res->err_code == 0 ) {
+				$msg['status'] = 'success';
+				if ($request['lang'] == 'cn') {
+					$msg['msg'] = '重置密码链接已发送至您的邮箱，请点击邮件内的重置密码链接重置您的密码。';
+				} else if ($request['lang'] == 'en') {
+					$msg['msg'] = 'A password reset link has been sent to your email. Please check your email and click the link to reset your password.';
+				}
+			} else {
+				error_log('Line: '.__LINE__.'    File: '.__FILE__);
+				error_log('send reset password email to '.$request['email'].'  failed.');
+				$msg['status'] = 'error';
+				if ($request['lang'] == 'cn') {
+					$msg['msg'] = '发生了错误...';
+				} else if ($request['lang'] == 'en') {
+					$msg['msg'] = 'Sorry, we are unable to reset password for email provided.';
+				}
+			}
+			return json_encode($msg);
+            
+            
         }
 
-        return $this->render('requestPasswordResetToken', [
-            'model' => $model,
-        ]);
+        return $this->render('requestPasswordResetToken');
     }
 
+    
     /**
      * Resets password.
      *
@@ -540,23 +600,56 @@ class SiteController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token)
+    public function actionResetPassword($lang, $email, $token)
     {
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        $request = Yii::$app->request->post();
+        
+        if (!empty($request['password'])) {
+            
+            $response = $this->verifyMailToken($token, $email, 'reset_pwd');
+            // 		print_r($response);
+            if ($response->err_code != 0) {
+                $msg['status'] = 'error';
+                $msg['msg'] = 'Token is wrong!';
+                return json_encode($msg);
+            }
+            
+            //重置密码
+            $url  = "http://mobvoi-account/reset_pwd?account_type=email";
+            $data_array = [
+                'need_captcha' => false,
+                'origin' => "developer.chumenwenwen.com",
+                'email' => $email,
+                'new_password' => $request['password'],
+            ];
+            $data_string = json_encode($data_array);
+            
+            $output_str = $this->http_post_data($url, $data_string);
+            
+            $output = json_decode($output_str);
+            if($output->err_code == 0) {
+                $msg['status'] = 'success';
+                if ($request['lang'] == 'cn') {
+                    $msg['msg'] = '重置密码成功！';
+                } else if ($request['lang'] == 'en') {
+                    $msg['msg'] = 'Reset Password success.';
+                }
+                	
+            } else {
+                $msg['status'] = 'error';
+                if ($request['lang'] == 'cn') {
+                    $msg['msg'] = '发生了错误...';
+                } else if ($request['lang'] == 'en') {
+                    $msg['msg'] = 'Sorry, we are unable to reset password for email provided.';
+                }
+            }
+            
+            return json_encode($msg);
+            
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password was saved.');
 
-            return $this->goHome();
-        }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
+        return $this->render('resetPassword',['email' => $email, 'token' => $token]);
     }
     
     /**
