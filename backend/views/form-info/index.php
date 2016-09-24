@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php Pjax::begin(); ?>
 
-<?php 
+<?php
     $user_identity = Yii::$app->user->identity->user_identity;
     if($user_identity == "审核管理员"){
         $gridColumns = [
@@ -108,15 +108,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider'=> $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'exportConfig'=>$exportConfig,
         'toolbar' => [
             '{export}',
             '{toggleData}',
         ],
-        'showPageSummary'=>$pageSummary,
         'panel'=>[
             'type'=>GridView::TYPE_PRIMARY,
-            'heading'=>$heading,
         ],
         'persistResize'=>false,
     ]);
@@ -177,15 +174,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider'=> $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'exportConfig'=>$exportConfig,
+        //'exportConfig'=>$exportConfig,
         'toolbar' => [
             '{export}',
             '{toggleData}',
         ],
-        'showPageSummary'=>$pageSummary,
+        //'showPageSummary'=>$pageSummary,
         'panel'=>[
             'type'=>GridView::TYPE_PRIMARY,
-            'heading'=>$heading,
+            //'heading'=>$heading,
         ],
         'persistResize'=>false,
     ]);
@@ -297,19 +294,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider'=> $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'exportConfig'=>$exportConfig,
-        // 'exportConfig' => [
-        //     GridView::EXCEL => ['label' => 'Save as EXCEL'],
-        //     GridView::CSV => ['label' => 'Save as CSV'],
-        // ],
         'toolbar' => [
             '{export}',
             '{toggleData}',
         ],
-        'showPageSummary'=>$pageSummary,
         'panel'=>[
             'type'=>GridView::TYPE_PRIMARY,
-            'heading'=>$heading,
         ],
         'persistResize'=>false,
     ]);
