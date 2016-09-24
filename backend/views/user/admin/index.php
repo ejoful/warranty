@@ -22,7 +22,7 @@ use yii\widgets\Pjax;
  * @var UserSearch $searchModel
  */
 
-$this->title = Yii::t('user', 'Manage users');
+$this->title = Yii::t('user', '用户管理');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

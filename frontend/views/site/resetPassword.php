@@ -18,13 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
-
 				<label class="control-label" for="resetpasswordform-password">password</label>
-                <input type="text" id="resetpasswordform-password" class="form-control" name="ResetPasswordForm[password]" value="" autofocus="">
+                <input type="password" id="resetpasswordform-password" class="form-control" name="ResetPasswordForm[password]" value="" autofocus="">
                 
                 <p class="help-block help-block-error"></p>
                 
-
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
                 </div>

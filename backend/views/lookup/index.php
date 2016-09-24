@@ -7,12 +7,12 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\LookupSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Lookups');
+$this->title = Yii::t('app', '状态查找表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lookup-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

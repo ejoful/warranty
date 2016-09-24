@@ -63,7 +63,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>Lookup::items('RMAStatus'),
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete}',
+                'buttons' =>[
+                    'update' => function($url, $model, $key) {
+                        if ($model->status!=4) {
+                             $options = array_merge([
+                                    'title' => Yii::t('yii', 'Update'),
+                            ]);
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, $options );
+                        }
+                    },
+                    'delete' => function($url, $model, $key) {
+                        if ($model->status!=4) {
+                            $options = array_merge([
+                                    'title' => Yii::t('yii', 'Delete'),
+                            ]);
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, $options );
+                        }
+                    },
+                ],
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

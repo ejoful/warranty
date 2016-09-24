@@ -28,29 +28,37 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => '出门问问',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => '审核表', 'url' => ['/form-info/index']],
-        ['label' => '一级问题表', 'url' => ['/fp/index']],
-        ['label' => '二级问题表', 'url' => ['/sp/index']],
-        ['label' => '问题检查表', 'url' => ['/check/index']],
-        ['label' => 'Lookup', 'url' => ['/lookup/index']],
-        ['label' => '国家表', 'url' => ['/country/index']],
-        ['label' => '用户', 'url' => ['/user/admin/index']],
-    ];
+    if(Yii::$app->user->identity->user_identity=="管理员"){
+            $menuItems = [
+            ['label' => '首页', 'url' => ['/site/index']],
+            ['label' => '审核表', 'url' => ['/form-info/index']],
+            ['label' => '一级问题表', 'url' => ['/fp/index']],
+            ['label' => '二级问题表', 'url' => ['/sp/index']],
+            ['label' => '问题检查表', 'url' => ['/check/index']],
+            ['label' => '状态查找表', 'url' => ['/lookup/index']],
+            ['label' => '国家表', 'url' => ['/country/index']],
+            ['label' => '用户', 'url' => ['/user/admin/index']],
+        ];
+    }
+    else{
+            $menuItems = [
+            ['label' => '首页', 'url' => ['/site/index']],
+            ['label' => '审核表', 'url' => ['/form-info/index']],
+        ];
+    }
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/user/security/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                '退出 (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link']
             )
             . Html::endForm()
@@ -74,9 +82,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; Mobvoi <?= date('Y') ?></p>
     </div>
 </footer>
 

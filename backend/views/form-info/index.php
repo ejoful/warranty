@@ -11,12 +11,12 @@ use backend\models\Country;
 /* @var $searchModel backend\models\FormInfoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Form Infos');
+$this->title = Yii::t('app', '审核表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="form-info-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
 
 <?php Pjax::begin(); ?>
 
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
-                'template' => '{view} {update} {delete} {approve} {reject} {info_request}',
+                'template' => '{view} {update} {approve} {reject} {info_request}',
                 'buttons' => [
                     'approve' => function ($url, $model, $key) {
                         if ($model->status != 4 && $model->status != 6) {

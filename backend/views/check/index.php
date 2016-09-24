@@ -10,14 +10,14 @@ use frontend\assets\AppAsset;
 /* @var $searchModel backend\models\CheckSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Checks');
+$this->title = Yii::t('app', '问题检查表');
 $this->params['breadcrumbs'][] = $this->title;
 
 AppAsset::addCss($this,"@web/css/check.css"); 
 ?>
 <div class="check-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

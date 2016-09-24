@@ -7,12 +7,12 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\FpSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Fps');
+$this->title = Yii::t('app', '一级问题表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fp-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

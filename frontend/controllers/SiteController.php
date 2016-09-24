@@ -22,8 +22,6 @@ use yii\helpers\Url;
  */
 class SiteController extends Controller
 {
-
-
     /**
      * @inheritdoc
      */

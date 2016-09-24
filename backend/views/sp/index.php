@@ -8,12 +8,12 @@ use backend\models\Fp;
 /* @var $searchModel backend\models\SpSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sps');
+$this->title = Yii::t('app', '二级问题表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sp-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

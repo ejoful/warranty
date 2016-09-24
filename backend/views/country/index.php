@@ -7,12 +7,12 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\CountrySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Countries');
+$this->title = Yii::t('app', '国家表');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="country-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>

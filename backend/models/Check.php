@@ -54,8 +54,8 @@ class Check extends \yii\db\ActiveRecord
             'spid' => Yii::t('app', '二级问题类别'),
             'des' => Yii::t('app', '检查步骤'),
             'position' => Yii::t('app', '显示顺序'),
-            'yes' => Yii::t('app', 'action yes'),
-            'no' => Yii::t('app', 'action no'),
+            'yes' => Yii::t('app', '选择yes时'),
+            'no' => Yii::t('app', '选择no时'),
         ];
     }
 
