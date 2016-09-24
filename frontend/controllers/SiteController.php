@@ -343,8 +343,8 @@ class SiteController extends Controller
 		
         $request = Yii::$app->request->post();
         
-        
-        if (!empty($request['username']) && !empty($request['email']) && !empty($request['password']) && !empty($request['language'])) {
+        // if (!empty($request['username']) && !empty($request['email']) && !empty($request['password']) && !empty($request['language']))
+        if (!empty($request['email']) && !empty($request['password']) && !empty($request['language'])) {
 			$user = UserData::findOne(['email' => $request['email']]);
 			if ($user != null) {
 				$user->password_hash = $request['password'];
@@ -356,7 +356,7 @@ class SiteController extends Controller
 // 				return json_encode($msg);
 			} else {
 				$user = new UserData();
-				$user->username = $request['username'];
+				//$user->username = $request['username'];
 				$user->email = $request['email'];
 				$user->password_hash = $request['password'];
 				$user->password_reset_token = $this->generateToken();
