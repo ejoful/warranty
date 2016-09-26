@@ -13,6 +13,8 @@ use backend\models\Country;
 
 $this->title = Yii::t('app', '审核表');
 $this->params['breadcrumbs'][] = $this->title;
+$cssString = ".grid-view td:nth-of-type(5){width:300px;display:inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;border-bottom: 0;}";
+$this->registerCss($cssString); 
 ?>
 <div class="form-info-index">
 
@@ -22,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
     $user_identity = Yii::$app->user->identity->user_identity;
-    if($user_identity == "审核管理员"){
+    if($user_identity==2){
         $gridColumns = [
             'consumer_name',
             'watch_id',
@@ -118,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'persistResize'=>false,
     ]);
 }
-    else if($user_identity == "物流管理员"){
+    else if($user_identity==3){
         $gridColumns = [
             'consumer_name',
             'watch_id',
@@ -187,7 +189,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'persistResize'=>false,
     ]);
 }
-    else if($user_identity == "管理员"){
+    else if($user_identity==1){
         $gridColumns = [
             'consumer_name',
             'watch_id',

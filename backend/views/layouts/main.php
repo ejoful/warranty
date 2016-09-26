@@ -34,7 +34,7 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    if(Yii::$app->user->identity->user_identity=="管理员"){
+    if(Yii::$app->user->identity->user_identity=="1"){
             $menuItems = [
             ['label' => '首页', 'url' => ['/site/index']],
             ['label' => '审核表', 'url' => ['/form-info/index']],

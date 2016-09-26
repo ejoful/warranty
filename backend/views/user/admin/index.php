@@ -39,7 +39,21 @@ $this->params['breadcrumbs'][] = $this->title;
     'filterModel'   =>  $searchModel,
     'layout'        =>  "{items}\n{pager}",
     'columns' => [
-        'user_identity',
+        //'user_identity',
+        [
+            'attribute' => 'user_identity',
+            'value' => function ($model) {
+                if($model->user_identity == 1){
+                    return "管理员";
+                }
+                else if($model->user_identity == 2){
+                    return "审核管理员";
+                }
+                else if($model->user_identity == 3){
+                    return "物流管理员";
+                }
+            },
+        ],
         'username',
         'email:email',
         [
