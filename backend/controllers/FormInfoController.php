@@ -55,7 +55,7 @@ class FormInfoController extends Controller
     {
         $searchModel = new FormInfoSearch();
         //让物流管理员只能看到审核管理员同意后的单子信息
-        if(Yii::$app->user->identity->user_identity=="物流管理员"){
+        if(Yii::$app->user->identity->user_identity=="3"){
             $searchModel->status=4;
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

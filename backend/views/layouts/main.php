@@ -34,27 +34,28 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    if(Yii::$app->user->identity->user_identity=="1"){
-            $menuItems = [
-            ['label' => '首页', 'url' => ['/site/index']],
-            ['label' => '审核表', 'url' => ['/form-info/index']],
-            ['label' => '一级问题表', 'url' => ['/fp/index']],
-            ['label' => '二级问题表', 'url' => ['/sp/index']],
-            ['label' => '问题检查表', 'url' => ['/check/index']],
-            ['label' => '状态查找表', 'url' => ['/lookup/index']],
-            ['label' => '国家表', 'url' => ['/country/index']],
-            ['label' => '用户', 'url' => ['/user/admin/index']],
-        ];
-    }
-    else{
-            $menuItems = [
-            ['label' => '首页', 'url' => ['/site/index']],
-            ['label' => '审核表', 'url' => ['/form-info/index']],
-        ];
-    }
+    
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/security/login']];
     } else {
+        if(Yii::$app->user->identity->user_identity=='1'){
+            $menuItems = [
+                ['label' => '首页', 'url' => ['/site/index']],
+                ['label' => '审核表', 'url' => ['/form-info/index']],
+                ['label' => '一级问题表', 'url' => ['/fp/index']],
+                ['label' => '二级问题表', 'url' => ['/sp/index']],
+                ['label' => '问题检查表', 'url' => ['/check/index']],
+                ['label' => '状态查找表', 'url' => ['/lookup/index']],
+                ['label' => '国家表', 'url' => ['/country/index']],
+                ['label' => '用户', 'url' => ['/user/admin/index']],
+            ];
+        }
+        else{
+            $menuItems = [
+                ['label' => '首页', 'url' => ['/site/index']],
+                ['label' => '审核表', 'url' => ['/form-info/index']],
+            ];
+        }
         $menuItems[] = '<li>'
             . Html::beginForm(['/user/security/logout'], 'post')
             . Html::submitButton(

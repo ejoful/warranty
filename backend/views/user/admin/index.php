@@ -43,13 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'attribute' => 'user_identity',
             'value' => function ($model) {
-                if($model->user_identity == 1){
+                if($model->user_identity == '1'){
                     return "管理员";
                 }
-                else if($model->user_identity == 2){
+                else if($model->user_identity == '2'){
                     return "审核管理员";
                 }
-                else if($model->user_identity == 3){
+                else if($model->user_identity == '3'){
                     return "物流管理员";
                 }
             },

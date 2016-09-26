@@ -24,7 +24,7 @@ $this->registerCss($cssString);
 
 <?php
     $user_identity = Yii::$app->user->identity->user_identity;
-    if($user_identity==2){
+    if($user_identity == '2'){
         $gridColumns = [
             'consumer_name',
             'watch_id',
@@ -120,7 +120,7 @@ $this->registerCss($cssString);
         'persistResize'=>false,
     ]);
 }
-    else if($user_identity==3){
+    else if($user_identity == '3'){
         $gridColumns = [
             'consumer_name',
             'watch_id',
@@ -189,7 +189,7 @@ $this->registerCss($cssString);
         'persistResize'=>false,
     ]);
 }
-    else if($user_identity==1){
+    else if($user_identity == '1'){
         $gridColumns = [
             'consumer_name',
             'watch_id',
