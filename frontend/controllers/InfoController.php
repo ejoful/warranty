@@ -74,7 +74,7 @@ class InfoController extends Controller
             ->orderBy('position')
             ->all();
             foreach ($Sp as $sp) {
-                $list.="<span class='list-span'><input type='radio' class='sp-btn' name='sp' value='".$sp->id."'>".$sp->des."</span>";
+                $list.="<span class='list-span sp-list-span'><input type='radio' class='sp-btn' id='sp-".$sp->id."' name='sp' value='".$sp->id."'><label onclick='click_sp(this)' name='sp-".$sp->id."' for='sp-".$sp->id."'>".$sp->des."</label></span>";
             }
             return $list;
         }

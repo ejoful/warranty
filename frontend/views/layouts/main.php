@@ -29,12 +29,19 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Warranty Service',
+        'brandLabel' => Html::img('@web/img/logo.png').'<span class="shu-line"></span>'."<span class='warranty'>Warranty</span>",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    // NavBar::begin([
+    //     'brandLabel' => 'Warranty',
+    //     'brandUrl' => Yii::$app->homeUrl,
+    //     'options' => [
+    //         'class' => 'navbar-inverse navbar-fixed-top',
+    //     ],
+    // ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         // ['label' => 'ReturnProduct', 'url' => ['/info/index']],
@@ -69,7 +76,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container info-container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

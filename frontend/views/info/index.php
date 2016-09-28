@@ -11,14 +11,16 @@ AppAsset::addCss($this,"@web/css/info.css");
 
 $this->title = 'Ticwatch Limited Warranty Claim Service';
 ?>
-
+<div class="banner">
+    <img src="<?= Url::to('@web/img/banner.jpg', true); ?>">
+</div>
 <div class="return-product">
     <div class="line-img">
-        <span class="circle circle1 active">1</span>
+        <img class="circle circle1 active" src="<?= Url::to('@web/img/first-step.png', true); ?>">
         <div class="line line1"></div>
-        <span class="circle circle2">2</span>
+        <img class="circle circle2" src="<?= Url::to('@web/img/second-step.png', true); ?>">
         <div class="line line2"></div>
-        <span class="circle circle3">3</span>
+        <img class="circle circle3" src="<?= Url::to('@web/img/third-step.png', true); ?>">
     </div>
     <div class="action-line">
         <span class="title1 active">Identify prblem</span>
@@ -27,13 +29,15 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
     </div>
     <div class="sel-pro">
         <div class="title">
-            <p>Got a problem? No worries-we are here to help! Please select the category that is closest to the problem you have:</p>
+            <p>Got a problem? No worries - we are here to help! Please select the category that is closest to the problem you have:</p>
         </div>
         <div class="option-list">
             <?php 
             foreach ($fp as $fp) {?>
                 <div class="fp-wrap">
-                    <span class="list-span"><input type="radio" name="fp" class="fp-btn" value="<?=$fp->id?>"><?= $fp->des ?>
+                    <span class="list-span fp-list-span">
+                        <input type="radio" id="fp-<?=$fp->id?>" name="fp" class="fp-btn" value="<?=$fp->id?>">
+                        <label name="fp-<?=$fp->id?>" for="fp-<?=$fp->id?>"><?= $fp->des ?></label>
                     </span>
                     <div class="sp">
                     </div>
@@ -50,9 +54,9 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
             <div class="check-des"></div>
         </div>
         <div class="yes-no">
-            <a class="back-btn">Back</a>
-            <a class="yes-btn">Yes</a>
-            <a class="no-btn">No</a>
+            <a class="back-btn">BACK</a>
+            <a class="yes-btn">YES</a>
+            <a class="no-btn">NO</a>
         </div>
         <input type="hidden" class="check-id" />
     </div>
@@ -87,29 +91,29 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
         <p>Seems that something is wrong with your watch. Please ship it back to us so that we can take a closer look. Please note that if your watch does not show the problem as you described, we will return your original watch. Please fill in your contact information and your shipping address as below:</p>
         <table>
             <tr>
-                <td class="form-title">Name</td>
-                <td><input type="text" class="name"></td>
+                <!-- <td class="form-title">Name</td> -->
+                <td><input type="text" class="name" placeholder="Name"></td>
                 <td><label class="msg">*</label></td>
             </tr>
             <tr>
-                <td class="form-title">Telephone</td>
-                <td><input type="text" class="tel"></td>
+                <!-- <td class="form-title">Telephone</td> -->
+                <td><input type="text" class="tel" placeholder="Telephone"></td>
                 <td><label class="msg">*</label></td>
             </tr>
             <tr>
-                <td class="form-title">Watch SN</td>
-                <td><input type="text" class="watchid"></td>
+                <!-- <td class="form-title">Watch SN</td> -->
+                <td><input type="text" class="watchid" placeholder="Watch SN"></td>
                 <td><label class="msg">*</label></td>
             </tr>
             <tr>
-                <td class="form-title">Email address</td>
-                <td><input type="text" class="email"></td>
+                <!-- <td class="form-title">Email address</td> -->
+                <td><input type="text" class="email" placeholder="E-mail address"></td>
                 <td><label class="msg">*</label></td>
             </tr>
             <tr>
-                <td class="form-title">Shipping country</td>
+                <!-- <td class="form-title">Shipping country</td> -->
                 <td class="form-title">
-                    <select class="country">
+                    <select class="country" placeholder="Shipping country">
                         <?php foreach($country as $country){?>
                         <option value="<?=$country->id?>"><?=$country->country_name?></option>
                         <?php }?>
@@ -118,13 +122,13 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
                 <td><label class="msg">*</label></td>
             </tr>
             <tr>
-                <td class="form-title">Shipping address</td>
-                <td><input type="text" class="address"></td>
+                <!-- <td class="form-title">Shipping address</td> -->
+                <td><input type="text" class="address" placeholder="Shipping address"></td>
                 <td><label class="msg">*</label></td>
             </tr>
             <tr>
-                <td class="form-title">Zip Code</td>
-                <td><input type="text" class="zip_code"></td>
+                <!-- <td class="form-title">Zip Code</td> -->
+                <td><input type="text" class="zip_code" placeholder="Zip Code"></td>
                 <td><label class="msg">*</label></td>
             </tr>
         </table>
@@ -155,7 +159,17 @@ $this->title = 'Ticwatch Limited Warranty Claim Service';
     </div>
 </div>
 <script type="text/javascript">
-
+    //jq 模拟radio 
+    $('.fp-list-span label').click(function(){
+        var radioId = $(this).attr('name');
+        $('.fp-list-span label').removeAttr('class') && $(this).attr('class', 'checked');
+        $('.fp-btn').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+    });
+    function click_sp(obj){
+            var radioId = $(obj).attr('name');
+            $('.sp-list-span label').removeAttr('class') && $(obj).attr('class', 'checked');
+            $('.sp-btn').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+    };
     //点击一级菜单
     $(".fp-btn").on('click', function() {
         var fpid = $(this).val();

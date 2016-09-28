@@ -8,19 +8,34 @@ body {
     margin: 0 auto -60px;
     padding: 0 0 60px;
 }
+.wrap .navbar{
+    height: 80px;
+    line-height: 80px;
+}
 .wrap .navbar-inverse{
     box-shadow: 0px 4px 10px 0 rgba(22,22,22,0.08);
     background-color: #fff;
     color: #000;
     border: none;
 }
+.navbar-brand{
+    font-size: 32px;
+    float: none;
+    padding: 0;
+    line-height: inherit;
+    height: auto;
+    position: relative;
+    display: block;
+}
+.navbar-right{
+    margin-top: 15px;
+}
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus{
     color: #23527c;
 }
 .navbar-inverse .navbar-brand{
-    color: #000;
-    font-weight: 600;
+    color: #333333;
 }
 .navbar-inverse .navbar-nav > li > a{
     color: #000;
@@ -154,6 +169,21 @@ a.desc:after {
     padding: 8px;
 }
 
+.navbar-brand > img{
+    display: inline-block;
+    vertical-align: inherit;
+}
+.shu-line{
+    display: inline-block;
+    height: 36px;
+    border: 1px solid rgba(0,0,0,0.44);
+    position: absolute;
+    top: 22px;
+    left: 70px;
+}
+.warranty{
+    margin-left: 40px;
+}
 @media(max-width:768px) {
 	.nav li > form {
 	    padding: 3px;

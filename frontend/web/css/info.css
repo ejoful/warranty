@@ -5,90 +5,131 @@ a{
 a:hover{
     text-decoration: none;
 }
-.return-product{
-    width: 70%;
-    margin: 0 auto;
-    margin-top: 40px;
+label{
+    font-weight: lighter;
+    display: inherit;
 }
-.return-product .title{
-    font-size: 18px;
+.info-container{
+    width: 100%;
+}
+.return-product{
+    width: 936px;
+    margin: 0 auto;
+    margin-top: 66px;;
+}
+.banner{
+    min-height: 321px;
+}
+input[type="radio"]{
+    margin: 3px 3px 0px 5px;
+    display: none;
+}
+.fp-list-span label,
+.sp-list-span label{
+    padding-left: 46px;
+    padding-top: 0px;
+    cursor: pointer;
+    background: url(../img/circle.png) no-repeat;
+    background-position: left 8px;
+}
+.fp-list-span label.checked,
+.sp-list-span label.checked{
+    background: url(../img/radio.png) no-repeat;
+    background-position: left 8px;
 }
 .return-product .list-span{
     display: block;
     margin-top: 20px;
+    font-size: 28px;
+    font-weight: lighter;
 }
 .return-product .sp{
     display: none;
-    margin-left: 30px;
-    color: rebeccapurple;
+    margin-left: 106px;
+}
+.sel-pro .title{
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 90px;
+    width: 832px;
 }
 .return-product .option-list{
-    font-weight: bold;
-}
-.return-product .action-line{
-    text-align: center;
+    padding-left: 23px;
 }
 .return-product .action-line span{
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     height: 40px;
     line-height: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 85px;
     margin-right: 40px;
+    margin-top: 8px;
+    color: #82cd8a;
 }
-.return-product .action-line .active{
-    color: #5480a3;
+.return-product .action-line .title1{
+    margin-left: 142px;
+}
+.return-product .action-line .title2{
+    margin-left: 72px;
+}
+.return-product .action-line .title3{
+    margin-left: 58px;
 }
 .return-product .line-img{
     text-align: center;
+    height: 55px;
 }
 .return-product .line-img .line{
-    height: 1px;
-    width: 205px;
+    height: 2px;
+    width: 141px;
     display: inline-block;
-    border: 3px solid #ccc;
-}
-.return-product .line-img .line.active{
-    border: 3px solid #5480a3;
-}
-.return-product .line-img .circle.active{
-    background-color: #5480a3;
-}
-.return-product .line-img .circle{
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    background-color: #ccc;
-    border-radius: 50%;
-    line-height: 30px;
-    text-align: center;
-    color: #fff;
+    border: 1px solid #82cd8a;
+    margin-left: 32px;
+    margin-right: 32px;
 }
 .return-product .commit{
     text-align: center;
     margin-top: 40px;
     margin-bottom: 40px;
 }
+.self-define .back-btn,
+.user-form .back-btn{
+    margin-bottom: 27px;
+}
 .return-product .commit a,
 .self-define .submit a,
 .self-check .yes-no a,
 .user-form .submit a{
     display: inline-block;
-    width: 90px;
-    height: 36px;
-    line-height: 36px;
+    //width: 90px;
+    //height: 36px;
+    //line-height: 36px;
     border-radius: 5px;
-    color: #5480a3;
-    border: 1px solid #5480a3;
+    //color: #82cd8a;
+    //border: 1px solid #82cd8a;
+    text-align: center;
+    width: 523px;
+    height: 74px;
+    line-height: 74px;
+    font-size: 28px;
+    color: #fff;
+    border: 1px solid #57bc61;
+    background-color: #57bc61;
+}
+.user-form{
+    width: 832px;
+    margin: 0 auto;
+    font-size: 28px;
+    color: #666666;
     text-align: center;
 }
-.return-product .commit a:hover,
-.self-define .submit a:hover,
-.self-check .yes-no a:hover,
-.user-form .submit a:hover{
-    color: #fff;
-    background-color: #5480a3;
-}
+// .return-product .commit a:hover,
+// .self-define .submit a:hover,
+// .self-check .yes-no a:hover,
+// .user-form .submit a:hover{
+//     color: #fff;
+//     background-color: #82cd8a;
+// }
 .self-check,
 .self-define,
 .yes-after,
@@ -96,12 +137,17 @@ a:hover{
 .form-submit-us,
 .form-submit-nous{
     display: none;
-    margin-top: 30px;
+    margin-top: 15px;
+    width: 832px;
+    margin: 0 auto;
+    text-align: center;
 }
 .self-define .submit,
 .user-form .submit{
-    margin-top: 40px;
+    margin-top: 80px;
+    margin-bottom: 80px;
     text-align: center;
+    font-size: 16px;
 }
 .self-define .title{
     font-size: 14px;
@@ -109,17 +155,18 @@ a:hover{
 input[type="file"]{
     display: inline-block;
 }
-.self-define .submit .back-btn,
-.user-form .back-btn,
-.self-define .submit .submit-btn{
-    margin-right: 40px;
-}
+// .self-define .submit .back-btn,
+// .user-form .back-btn,
+// .self-define .submit .submit-btn{
+//     margin-right: 40px;
+// }
 .self-check .fp-des{
-    font-size: 22px;
+    font-size: 28px;
 }
 .self-check .check-des{
     margin-left: 18px;
     margin-top: 30px;
+    font-size: 28px;
 }
 .self-check .yes-no{
     margin-top: 40px;
@@ -127,6 +174,7 @@ input[type="file"]{
 }
 .self-check .yes-no a{
     margin-right: 40px;
+    margin-top: 26px;
 }
 .yes-after{
     text-align: center;
@@ -136,39 +184,46 @@ input[type="file"]{
     margin-top: 40px;
     display: block;
 }
-.user-form .form-title{
-    text-align: right;
-    width: 200px;
-    margin-right: 5px;
+.self-define .content{
+    text-align: left;
 }
 .user-form input,
 .user-form select,
 .self-define .video-url{
-    width: 196px;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
+    width: 525px;
+    height: 73px;
+    padding: 6px 30px;
+    font-size: 22px;
     line-height: 34px;
-    color: #555;
-    background-color: #fff;
+    background-color: #f6f5f5;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 .self-define .video-url{
-    width: 340px;
+    width: 376px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #fff;
 }
 .user-form tr{
     display: block;
     margin-top: 30px;
 }
 .user-form td{
-    display: inline-block;
+    display: grid;
 }
 .user-form table{
-    margin: 0 auto;
+    margin: 70px auto 30px;
 }
 .user-form .upload-proof-p{
-    margin-top: 30px;
+    //margin-top: 30px;
+    font-size: 20px;
+    text-align: left;
+    color: #4ebcf7;
+}
+.redactor-editor{
+    text-align: left;
 }
 .form-submit-us a,
 .form-submit-nous a{
@@ -188,7 +243,7 @@ input[type="file"]{
     color: red;
 }
 .self-define .redactor-box{
-    margin-bottom: 0;
+    margin-bottom: 40px;
 }
 .user-form .msg{
     color: red;

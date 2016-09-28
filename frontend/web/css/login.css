@@ -1,0 +1,87 @@
+.wrap{
+    background:url(../img/login_bg.jpg) no-repeat;
+    background-size: cover;
+}
+.login-title{
+    width: 828px;
+    margin: 55px auto 45px;
+    font-size: 24px;
+    text-align: center;
+}
+.login-title p{
+    color: #fff;
+}
+.site-login{
+    width: 956px;
+    margin: 0 auto;
+    background-color: #fff;
+    text-align: center;
+    padding-top: 70px;
+    margin-bottom: 240px;
+}
+.site-login h1{
+    font-size: 36px;
+}
+.site-login p{
+    font-size: 16px;
+}
+.site-login .row{
+    margin: 55px 0 0;
+}
+.site-login .row .col-lg-5{
+    float: none;
+    margin: 0 auto;
+    width: 525px;
+}
+.form-control{
+    width: 525px;
+    height: 73px;
+    font-size: 22px;
+    background-color: #f6f5f5;
+    padding-left: 75px;
+}
+.form-group{
+    position: relative;
+}
+.form-group img{
+    position: absolute;
+    top: 24.5px;
+    left: 26px;
+}
+.field-loginform-password img{
+    top: 20px;
+}
+.forget-pass,.signup{
+    width: 525px;
+}
+.forget-pass{
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.signup,.policy{
+    text-align: left;
+    margin-top: 24px;
+}
+.forget-pass a,.signup a,.policy a{
+    color: #0ec0fa;
+    background:url(../img/reset.png) no-repeat;
+    font-size: 20px;
+    background-position: left center;
+    padding-left: 22px;
+}
+.form-group .btn-primary{
+    background-color: #2fbd59;
+    width: 525px;
+    height: 74px;
+    font-size: 28px;
+    line-height: 74px;
+    padding: 0;
+    border: 1px solid #2fbd59;
+}
+.note{
+    margin: 46px auto 56px;
+    width: 300px;
+    font-size: 16px;
+    color: #b1b1b1;
+}
